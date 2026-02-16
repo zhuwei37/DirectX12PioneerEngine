@@ -175,12 +175,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>..\Build\Debug\net8.0-windows</OutDir>
     <IncludePath>../Crate;..\Entity;..\Math;..\Common;..\ThirdParty\assimp\include;..\Rendering;..\ThirdParty\boost\include;..\ThirdParty\yaml\include;..\ThirdParty\json;$(IncludePath)</IncludePath>
-    <LibraryPath>..\Lib;..\ThirdParty\assimp\lib;..\ThirdParty\boost\lib;..\ThirdParty\yaml\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>..\Lib;..\ThirdParty\assimp\static;..\ThirdParty\boost\static;..\ThirdParty\yaml\static;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>..\Build\Debug\net8.0-windows</OutDir>
     <IncludePath>../Crate;..\Entity;..\Math;..\Common;..\ThirdParty\assimp\include;..\Rendering;..\ThirdParty\boost\include;..\ThirdParty\yaml\include;..\ThirdParty\json;$(IncludePath)</IncludePath>
-    <LibraryPath>..\Lib;..\ThirdParty\assimp\lib;..\ThirdParty\boost\lib;..\ThirdParty\yaml\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>..\Lib;..\ThirdParty\assimp\static;..\ThirdParty\boost\static;..\ThirdParty\yaml\static;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

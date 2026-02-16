@@ -1,3 +1,7 @@
+!ThirdParty/
+!Build/Shaders/
+!Build/Textures/
+!static/
 # 编译生成文件
 *.o
 *.obj
@@ -10,7 +14,7 @@
 *.su
 
 # 构建目录
-build/
+
 obj/
 Debug/
 Release/
@@ -64,6 +68,7 @@ FreeRTOSConfig.h.bak
 # 依赖管理
 dependencies/
 lib/
+Lib/
 *.a
 *.so
 *.lib
