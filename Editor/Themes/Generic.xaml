@@ -1,0 +1,15 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Editor">
+
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Themes/Converter.xaml"/>
+        <ResourceDictionary Source="/Themes/ToggleButton/TreeItemSwitchButton.xaml"/>
+        <ResourceDictionary Source="/Themes/TreeView/PreviewSceneTreeViewItem.xaml"/>
+        <ResourceDictionary Source="/Themes/TreeView/PreviewSceneTreeView.xaml"/>
+        <ResourceDictionary Source="/Themes/ViewPortForm.xaml"/>
+        <ResourceDictionary Source="/Themes/Text/TextEditable.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

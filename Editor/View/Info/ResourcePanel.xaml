@@ -1,0 +1,182 @@
+﻿<UserControl x:Class="Editor.View.Info.ResourcePanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Editor.View.Info"
+             xmlns:control1="clr-namespace:Editor.Control"
+             xmlns:control="clr-namespace:Editor.Control.TreeView"
+             xmlns:textcontrol="clr-namespace:Editor.Control.Text"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:dd="urn:gong-wpf-dragdrop"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="MenuItem">
+            
+        </Style>
+        <ContextMenu x:Key="InFolderResourceMenu">
+            <MenuItem Header="创建文件夹" Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl},Path=DataContext.CreateFolderCommand}" CommandParameter="{Binding}"/>
+            <MenuItem Header="导入纹理"/>
+            <MenuItem Header="创建材质" Command="{Binding CreateMaterialCommand}"/>
+            <MenuItem Header="导入模型"/>
+            <Separator/>
+            <MenuItem Header="重命名" Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl},Path=DataContext.RenameResourceCommand}" CommandParameter="{Binding}"/>
+            <MenuItem Header="在资源管理器中查看" Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl},Path=DataContext.OpenFileExplorerCommand}" CommandParameter="{Binding}"/>
+            <Separator/>
+            <MenuItem Header="删除" Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl},Path=DataContext.DeleteResourceCommand}" CommandParameter="{Binding}"/>
+        </ContextMenu>
+        <ContextMenu x:Key="RootMenu">
+            <MenuItem Header="创建文件夹" Command="{Binding CreateFolderCommand}"/>
+            <MenuItem Header="导入纹理"/>
+            <MenuItem Header="创建材质" Command="{Binding CreateMaterialCommand}"/>
+            <MenuItem Header="导入模型"/>
+            <Separator/>
+            <MenuItem Header="在资源管理器中查看" Command="{Binding OpenFileExplorerCommand}"/>
+        </ContextMenu>
+        <Style x:Key="FileListBoxItemStyle" TargetType="ListBoxItem">
+            <Setter Property="ContextMenu" Value="{StaticResource InFolderResourceMenu}"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="control1:ContentControlDoubleClick.IsEnable" Value="True"/>
+            <Setter Property="control1:ContentControlDoubleClick.DoubleClickCommand" Value="{Binding RelativeSource={RelativeSource AncestorType=UserControl},Path=DataContext.DoubleClickResourceCommand}"/>
+            <Setter Property="control1:ContentControlDoubleClick.DoubleClickCommandParameter" Value="{Binding}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border Background="{TemplateBinding Background}">
+                            <Border.ToolTip>
+                                <TextBlock Text="{Binding Title}"/>
+                            </Border.ToolTip>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <Image Source="{Binding Icon}" Grid.Row="0"/>
+                                <Border x:Name="PART_Bor"  Grid.Row="1" CornerRadius="5">
+                                    <textcontrol:TextEditable HorizontalAlignment="Center" Margin="0,2,0,2" Text="{Binding Title}"  VerticalAlignment="Center"/>
+                                    <!--<Label Content="{Binding Title}" x:Name="PART_Lable" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>-->
+                                </Border>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="BlueViolet" TargetName="PART_Bor"/>
+                            </Trigger>
+                            <!--<EventTrigger RoutedEvent="Doub"-->
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+           
+        </Style>
+        <Style x:Key="FileListBoxSytle" TargetType="ListBox">
+            <Setter Property="ItemContainerStyle" Value="{StaticResource FileListBoxItemStyle}"/>
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <WrapPanel  ItemHeight="80" ItemWidth="100"  Orientation="Horizontal">
+                        </WrapPanel>
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBox">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}">
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                                <ItemsPresenter/>
+                            </ScrollViewer>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style x:Key="FileLevelsListBoxItemStyle" TargetType="ListBoxItem" >
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0"
+                                        control1:ItemClick.ClickCommand="{Binding RelativeSource={RelativeSource AncestorType=UserControl},Path=DataContext.SelectFileLevelCommnad}"
+ control1:ItemClick.ClickCommandParameter="{Binding}"
+                                       Content="{Binding FolderName}"/>
+                                <Label Grid.Column="1"
+                                      
+                                       Background="Transparent" Visibility="{Binding IsLast,Converter={StaticResource InverseBoolToVisbilty}}" Content="->"/>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="FileLevelsListBoxStyle" TargetType="ListBox">
+            <Setter Property="ItemContainerStyle" Value="{StaticResource FileLevelsListBoxItemStyle}"/>
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBox">
+                        <Border 
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}">
+                        <ItemsPresenter/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type control:PreviewSceneTreeViewItem}" BasedOn="{StaticResource {x:Type control:PreviewSceneTreeViewItem}}">
+            <Setter Property="RenameCommand" Value="{Binding RelativeSource={RelativeSource AncestorType=UserControl},Path=DataContext.RenameResourceCompletedCommand}"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" MinWidth="150"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"  MinWidth="150"/>
+        </Grid.ColumnDefinitions>
+        <control:PreviewSceneTreeView   SelectedItem="{Binding SelectedResourceItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  SelectedCommand="{Binding FolderTreeSelectedCommand}" ItemsSource="{Binding Resources}" Grid.Column="0" Grid.RowSpan="2" >
+            
+        </control:PreviewSceneTreeView>
+        <GridSplitter Grid.Column="1"  Width="5" Grid.RowSpan="2" ResizeBehavior="PreviousAndNext"/>
+        <Grid Grid.Row="0" Grid.Column="2" Height="27">
+            <ListBox Style="{StaticResource FileLevelsListBoxStyle}" ItemsSource="{Binding FolderLevels}"/>
+        </Grid>
+        <Grid Grid.Column="2" Grid.Row="1">
+            <ListBox  Style="{StaticResource FileListBoxSytle}"
+                      ContextMenu="{StaticResource RootMenu}" ItemsSource="{Binding FolderChildrenResources}"
+                      
+                     SelectedValue="{Binding SelectedResourceItem}"
+                AllowDrop="True"
+                      dd:DragDrop.IsDragSource="True"
+                      dd:DragDrop.IsDropTarget="True"
+                      dd:DragDrop.UseDefaultDragAdorner="True"
+                      dd:DragDrop.UseDefaultEffectDataTemplate="True"
+                      dd:DragDrop.DropHandler="{Binding}"
+                      dd:DragDrop.DragHandler="{Binding}">
+                
+            </ListBox>
+        </Grid>
+    </Grid>
+</UserControl>

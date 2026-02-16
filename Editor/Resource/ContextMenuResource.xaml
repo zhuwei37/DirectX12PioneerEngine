@@ -1,0 +1,26 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ContextMenu x:Key="ResourceMenu">
+        <MenuItem Header="创建文件夹" Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl},Path=DataContext.CreateFolderCommand}" CommandParameter="{Binding}"/>
+        <MenuItem Header="导入纹理"/>
+        <MenuItem Header="创建材质"/>
+        <MenuItem Header="导入模型"/>
+        <Separator/>
+        <MenuItem Header="重命名" Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl},Path=DataContext.RenameResourceCommand}" CommandParameter="{Binding}"/>
+        <MenuItem Header="在资源管理器中查看" Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl},Path=DataContext.OpenFileExplorerCommand}" CommandParameter="{Binding}"/>
+        <Separator/>
+        <MenuItem Header="删除" Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl},Path=DataContext.DeleteResourceCommand}" CommandParameter="{Binding}"/>
+    </ContextMenu>
+    <ContextMenu x:Key="SceneNodeMenu">
+        <MenuItem Header="创建空对象" Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl},Path=DataContext.CreateSceneNodeCommand}" CommandParameter="{Binding}"/>
+        <MenuItem Header="创建3D对象">
+            <MenuItem Header="立方体" Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl},Path=DataContext.CreateBoxGameObjectCommand}" CommandParameter="{Binding}"/>
+            <MenuItem Header="球体" Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl},Path=DataContext.CreateSphereGameObjectCommand}" CommandParameter="{Binding}"/>
+            <MenuItem Header="平面" Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl},Path=DataContext.CreateGridGameObjectCommand}" CommandParameter="{Binding}"/>
+        </MenuItem>
+        <Separator/>
+        <MenuItem Header="删除对象" Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl},Path=DataContext. DeleteSceneNodeCommand}" CommandParameter="{Binding}"/>
+        <MenuItem Header="重命名" Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl},Path=DataContext.RenameSceneNodeCommand}" CommandParameter="{Binding}"/>
+    </ContextMenu>
+   
+</ResourceDictionary>

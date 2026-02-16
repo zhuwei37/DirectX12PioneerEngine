@@ -1,0 +1,351 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="头文件\Component">
+      <UniqueIdentifier>{b310f624-9a3a-4c8e-9589-86fe08fe329a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Scene">
+      <UniqueIdentifier>{3ed2669d-188f-4a7c-a23e-62f876ba13fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Component">
+      <UniqueIdentifier>{b7a22561-02fc-4f0f-a24c-85195e06c1a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Scene">
+      <UniqueIdentifier>{6040184a-dc21-45df-89a5-1bf9aa38963a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Utilities">
+      <UniqueIdentifier>{5f008257-6710-4a0c-8762-29d41acaa459}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Utilities">
+      <UniqueIdentifier>{54c8aea7-3590-4b7e-a978-8f8a38b7f8e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Render">
+      <UniqueIdentifier>{3a1cb9e5-0c0d-4f12-8950-3728fb153fe4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Render">
+      <UniqueIdentifier>{141c8cca-b32d-43e8-99c8-a5ca5181c909}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Asset">
+      <UniqueIdentifier>{f4a8d00b-6df8-4d5b-bfc0-ec53928c090e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Asset">
+      <UniqueIdentifier>{7d7a663b-1edd-478f-8d8c-3c146f77c392}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Resource">
+      <UniqueIdentifier>{9898c0ca-2d62-45a4-bc79-6d1c26731c8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Resource">
+      <UniqueIdentifier>{7b039f28-fb43-40f2-a439-e345c1b20bae}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="EnterEngine.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ExPort.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ExPortCamera.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ExportTime.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderImpl.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ISceneNode.h">
+      <Filter>头文件\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="IScene.h">
+      <Filter>头文件\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>头文件\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor.h">
+      <Filter>头文件\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="IComponent.h">
+      <Filter>头文件\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneNode.h">
+      <Filter>头文件\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneNodeInfo.h">
+      <Filter>头文件\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneNodeFactory.h">
+      <Filter>头文件\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="ExportScene.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ActorFactory.h">
+      <Filter>头文件\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="interface.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="String.h">
+      <Filter>头文件\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="ActorManager.h">
+      <Filter>头文件\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderSystem.h">
+      <Filter>头文件\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderHost.h">
+      <Filter>头文件\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>头文件\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshRenderer.h">
+      <Filter>头文件\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshImport.h">
+      <Filter>头文件\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>头文件\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshFilter.h">
+      <Filter>头文件\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="tamplates.h">
+      <Filter>头文件\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentFactory.h">
+      <Filter>头文件\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>头文件\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="ExportRender.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ActorComponentFactory.h">
+      <Filter>头文件\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="ExportComponent.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>头文件\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceSystem.h">
+      <Filter>头文件\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="IResource.h">
+      <Filter>头文件\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceType.h">
+      <Filter>头文件\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceHandle.h">
+      <Filter>头文件\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureProcessor.h">
+      <Filter>头文件\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="FolderProcessor.h">
+      <Filter>头文件\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="FolderResource.h">
+      <Filter>头文件\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="GUIDHelper.h">
+      <Filter>头文件\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="IResourceProcessor.h">
+      <Filter>头文件\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="FileSystem.h">
+      <Filter>头文件\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="ExportResource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceState.h">
+      <Filter>头文件\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="UUIDHelper.h">
+      <Filter>头文件\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureResource.h">
+      <Filter>头文件\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshProcessor.h">
+      <Filter>头文件\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshResource.h">
+      <Filter>头文件\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="interface_resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MaterialResource.h">
+      <Filter>头文件\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="MaterialProcessor.h">
+      <Filter>头文件\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="ExportMaterial.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderHostGroup.h">
+      <Filter>头文件\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="SkyBox.h">
+      <Filter>头文件\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="DeferredRenderHost.h">
+      <Filter>头文件\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="GBufferController.h">
+      <Filter>头文件\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="ShadowMapController.h">
+      <Filter>头文件\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="ShadowMap.h">
+      <Filter>头文件\Render</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="EnterEngine.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ExportCamera.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderImpl.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneNode.cpp">
+      <Filter>源文件\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>源文件\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="ExportScene.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="String.cpp">
+      <Filter>源文件\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderSystem.cpp">
+      <Filter>源文件\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderHost.cpp">
+      <Filter>源文件\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshImport.cpp">
+      <Filter>源文件\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshFilter.cpp">
+      <Filter>源文件\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshRenderer.cpp">
+      <Filter>源文件\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor.cpp">
+      <Filter>源文件\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentFactory.cpp">
+      <Filter>源文件\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>源文件\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="ExportRender.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ActorManager.cpp">
+      <Filter>源文件\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>源文件\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="ExportComponent.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceSystem.cpp">
+      <Filter>源文件\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="FolderProcessor.cpp">
+      <Filter>源文件\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>源文件\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="FileSystem.cpp">
+      <Filter>源文件\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="ExportResource.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshResource.cpp">
+      <Filter>源文件\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="MaterialProcessor.cpp">
+      <Filter>源文件\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureProcessor.cpp">
+      <Filter>源文件\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshProcessor.cpp">
+      <Filter>源文件\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="ExportMaterial.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SkyBox.cpp">
+      <Filter>源文件\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DeferredRenderHost.cpp">
+      <Filter>源文件\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="ShadowMapController.cpp">
+      <Filter>源文件\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="ShadowMap.cpp">
+      <Filter>源文件\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderHostGroup.cpp">
+      <Filter>源文件\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="IComponent.cpp">
+      <Filter>源文件\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="MaterialResource.cpp">
+      <Filter>源文件\Resource</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

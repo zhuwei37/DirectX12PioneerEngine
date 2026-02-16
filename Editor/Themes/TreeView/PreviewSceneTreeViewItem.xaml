@@ -1,0 +1,54 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:control="clr-namespace:Editor.Control.TreeView"
+                    xmlns:textControl="clr-namespace:Editor.Control.Text"
+                    xmlns:toggleButtons="clr-namespace:Editor.Control.ToggleButtons"
+                       xmlns:converter="clr-namespace:Editor.Converter"
+                    
+                    >
+    <converter:TreeItemLevelToMarginConverter x:Key="TreeLevelConvertMargin"/>
+    <Style TargetType="control:PreviewSceneTreeViewItem">
+        <Setter Property="ItemsSource" Value="{Binding Children}"/>
+        <Setter Property="IsExpanded" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="control:PreviewSceneTreeViewItem">
+                    <Border BorderBrush="{TemplateBinding  BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}">
+                        <StackPanel Orientation="Vertical">
+                            <Grid Height="20" x:Name="PART_Item">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Orientation="Horizontal" Margin="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TreeLevelConvertMargin}}">
+                                   <toggleButtons:TreeItemSwitchButton Width="13" x:Name="PART_TB"  IsChecked="{Binding RelativeSource={RelativeSource Templatedparent},Path=IsExpanded}" Grid.Column="0" Visibility="Hidden"/>
+                                   <Image Width="13" Source="{Binding Icon}" />
+                                </StackPanel>
+                                <textControl:TextEditable Grid.Column="1"  TextChangedCommand="{Binding RelativeSource={RelativeSource Templatedparent},Path=RenameCommand}" CommandParameter="{Binding}" IsEditable="{Binding IsEditable,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Background="Transparent" Margin="5,0,0,0" Text="{Binding Title}"  />
+                            </Grid>
+                            <ItemsPresenter x:Name="PART_Items" Visibility="Collapsed" >
+                            </ItemsPresenter>
+                        </StackPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsExpanded" Value="True">
+                            <Setter Property="Visibility" TargetName="PART_Items" Value="Visible"/>
+                        </Trigger>
+                        <DataTrigger Binding="{Binding ElementName=PART_Item,Path=IsMouseOver}" Value="True">
+                            <Setter TargetName="PART_Item" Property="Background" Value="#D1E3FF"/>
+                        </DataTrigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="LightBlue" TargetName="PART_Item"/>
+                            <Setter Property="TextBlock.Foreground" Value="#FFFFFF" TargetName="PART_Item" />
+                        </Trigger>
+                        <Trigger Property="HasItems" Value="True">
+                            <Setter Property="Visibility" TargetName="PART_TB" Value="Visible"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

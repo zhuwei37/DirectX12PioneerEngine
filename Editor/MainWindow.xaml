@@ -1,0 +1,40 @@
+﻿<Window x:Class="Editor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Editor"
+        mc:Ignorable="d"
+        xmlns:m="clr-namespace:ViewPortLib;assembly=ViewPortLib"
+        xmlns:view="clr-namespace:Editor.View"
+      xmlns:control="clr-namespace:Editor.Control"
+        Title="MainWindow" Height="700" Width="800"  Visibility="Visible" WindowState="Maximized">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="40"/>
+        </Style>
+    </Window.Resources>
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!--<StackPanel Orientation="Horizontal">
+            <Button Content="添加组件" Visibility="Visible" Command="{Binding InitRenderCommand}" Background="Green" />
+        </StackPanel>-->
+        <Menu Grid.Row="0" Background="White">
+            <MenuItem Header="文件">
+                <MenuItem Header="导入"/>
+            </MenuItem>
+            <MenuItem Header="场景">
+                <MenuItem Header="预设场景" Command="{Binding OpenReadySceneCommand}"/>
+                <MenuItem Header="添加场景" Command="{Binding AddSceneNodeCommand}"/>
+            </MenuItem>
+            
+
+        </Menu>
+        <view:DockMainView Grid.Row="1"/>
+    </Grid>
+  
+</Window>
