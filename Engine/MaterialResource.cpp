@@ -1,4 +1,5 @@
 #include"MaterialResource.h"
+#include"EngineManager.h"
 #include"yaml-cpp/yaml.h"
 #include"GUIDHelper.h"
 void  MaterialResource::SerializeShaderValue(YAML::Emitter& out,IShaderValue*  ptr,Material* mat)
@@ -70,6 +71,7 @@ std::string MaterialResource::Serialize()
 	std::vector<IShaderValue*> shaderFloat4Values;
 	std::vector<IShaderValue*> shaderTextureValues;
 	auto shaderProerties = this->mMat->GetGMat()->mShaderProperties->ShaderValues;
+	//for(auto )
 	YAML::Emitter out;
 	//std::string str = GUIDHelper::ResourceIdToString(this->GetId());
 	out << YAML::BeginMap;
@@ -120,4 +122,48 @@ std::string MaterialResource::Serialize()
 	out << YAML::EndMap;
 
 	return out.c_str();
+}
+void MaterialResource::SetValues(Material* mat)
+{
+	mat->SetRenderShader(this->mTempRenderShaderId);
+	for (auto& var : mTempVars)
+	{
+		switch (var.type)
+		{
+		case ShaderValueType::Float:
+		{
+			mat->SetFloat(var.shaderPropertyID, var.Float);
+			break;
+		}
+		case ShaderValueType::Float3:
+		{
+			DirectX::XMFLOAT3 float3 = { var.Float3[0],var.Float3[1],var.Float3[2] };
+			mat->SetFloat3(var.shaderPropertyID, float3);
+			break;
+		}
+		case ShaderValueType::Float4:
+		{
+			DirectX::XMFLOAT4 float4 = { var.Float4[0],var.Float4[1],var.Float4[2],var.Float4[3]};
+			mat->SetFloat4(var.shaderPropertyID, float4);
+			break;
+		}
+		case ShaderValueType::_Texture:
+		{
+			ResourceID resourceId = var._ResourceID;
+			auto resource=EngineManager::Get()->GetResourceSystem()->GetResourceManager()->GetResource(resourceId);
+			if (resource != nullptr)
+			{
+				auto texture=dynamic_cast<TextureResource*>(resource);
+				if (texture != nullptr)
+				{
+					mat->SetTexture(var.shaderPropertyID, texture);
+				}
+			}
+			break;
+		}
+		default:
+			break;
+		}
+	}
+	this->mTempVars.clear();
 }

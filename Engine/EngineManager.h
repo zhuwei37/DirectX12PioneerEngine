@@ -1,8 +1,8 @@
 #pragma once
 #include"Scene.h"
-#include<assimp/Importer.hpp>
-#include <assimp\scene.h>
-#include <assimp\postprocess.h>
+//#include<assimp/Importer.hpp>
+//#include <assimp\scene.h>
+//#include <assimp\postprocess.h>
 #include"Device.h"
 #include"ActorManager.h"
 #include"ResourceSystem.h"

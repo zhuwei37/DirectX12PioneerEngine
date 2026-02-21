@@ -24,7 +24,7 @@ public:
 	int GetInMemeryResourceCount();
 	std::vector<ResourceID> GetInMemeryResourceIDs();
 
-
+	void Save();
 private:
 	void SetRootFolderResource(FolderResource*);
 	mutable FolderResource* mRootFolderResource;

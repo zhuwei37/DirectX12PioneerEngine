@@ -10,34 +10,14 @@
 #include"yaml-cpp/emitter.h"
 class MaterialResource :public IResource
 {
-	
+	friend class MaterialProcessor;
 public:
 	
-	MaterialResource()
-	{
-		mMat = std::make_shared<Material>();
-		this->mResourceType = ResourceType::MATERIAL;
-		this->mId = IResource::NewID();
-	}
-	Material* GetMaterial()
-	{
-		if (mMat != nullptr)
-		{
-			return mMat.get();
-		}
-		return nullptr;
-		
-	}
-	std::string Serialize()override;
-
-	static void SerializeShaderValue(YAML::Emitter &out, IShaderValue* ptr, Material* mat);
-
-private:
-	struct Var 
+	struct Var
 	{
 		ShaderPropertyID shaderPropertyID;
 		ShaderValueType type;
-		union 
+		union
 		{
 			float Float4x4[4][4];
 			float Float4[4];
@@ -47,7 +27,41 @@ private:
 			ResourceID _ResourceID;
 		};
 	};
-private :
-	std::shared_ptr<Material> mMat;
+public:
 	
+	MaterialResource()
+	{
+		//mMat = std::make_shared<Material>();
+		this->mResourceType = ResourceType::MATERIAL;
+		this->mId = IResource::NewID();
+	}
+	MaterialResource(ResourceID id)
+	{
+		//mMat = std::make_shared<Material>();
+		this->mResourceType = ResourceType::MATERIAL;
+		this->mId = id;
+	}
+	Material* GetMaterial()
+	{
+		if (mMat == nullptr)
+		{
+			this->mMat = std::make_shared<Material>();
+			SetValues(this->mMat.get());
+		}
+		return mMat.get();
+		
+	}
+
+	std::string Serialize()override;
+
+	static void SerializeShaderValue(YAML::Emitter &out, IShaderValue* ptr, Material* mat);
+
+
+	
+private :
+
+	void SetValues(Material* mat);
+	std::shared_ptr<Material> mMat;
+	std::vector<Var> mTempVars;
+	int mTempRenderShaderId = 0;
 };

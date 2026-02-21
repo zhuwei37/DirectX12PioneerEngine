@@ -75,5 +75,9 @@ namespace Editor.RenderDx
         }
 
 
+        [DllImport("Engine",EntryPoint ="Save")]
+        public extern static void Save();
+
+
     }
 }

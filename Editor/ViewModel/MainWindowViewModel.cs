@@ -28,13 +28,14 @@ namespace Editor.ViewModel
     public class MainWindowViewModel:CommunityToolkit.Mvvm.ComponentModel.ObservableObject
     {
        
-       
+       public ICommand SaveCommand { get;private set; }
         public ICommand OpenReadySceneCommand { get; private set; }
         public ICommand AddSceneNodeCommand { get; private set; }
         public MainWindowViewModel()
         {
             OpenReadySceneCommand = new RelayCommand(OpenReadyScene);
             AddSceneNodeCommand= new RelayCommand(AddSceneNode);
+            SaveCommand=new RelayCommand(Save);
             Init();
         }
        async void Init()
@@ -49,7 +50,10 @@ namespace Editor.ViewModel
             DockManager.Instance.AddTool(new InspectorMainViewModel());
             DockManager.Instance.AddPage(new ViewportDxViewModel());
         }
-
+        private void Save()
+        {
+            EngineDxImport.Save();
+        }
         private void OpenReadyScene()
         {
             // SceneNode sceneNode = new SceneNode();

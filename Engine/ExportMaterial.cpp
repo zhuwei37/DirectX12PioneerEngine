@@ -35,6 +35,7 @@ bool SetMaterialShaderID(ResourceID matResourceID, int shaderID)
 		if (matResource != nullptr)
 		{
 			matResource->GetMaterial()->SetRenderShader(shaderID);
+			matResource->SetDirty(true);
 		}
 	}
 	return -1;
@@ -126,6 +127,7 @@ void SetMaterialPropertyFloat(ResourceID matResourceID, long long propertyId, fl
 		if (matResource != nullptr)
 		{
 			matResource->GetMaterial()->SetFloat(propertyId, refValue);
+			matResource->SetDirty(true);
 		}
 	}
 	//return false;
@@ -140,6 +142,7 @@ void SetMaterialPropertyFloat3(ResourceID matResourceID, long long propertyId, D
 		if (matResource != nullptr)
 		{
 			matResource->GetMaterial()->SetFloat3(propertyId, refValue);
+			matResource->SetDirty(true);
 		}
 	}
 	//return -1;
@@ -154,6 +157,7 @@ void SetMaterialPropertyFloat4(ResourceID matResourceID, long long propertyId, D
 		if (matResource != nullptr)
 		{
 			matResource->GetMaterial()->SetFloat4(propertyId, refValue);
+			matResource->SetDirty(true);
 		}
 	}
 	//return -1;
@@ -178,6 +182,7 @@ void SetMaterialPropertyTexture(ResourceID matResourceID, long long propertyId, 
 			{
 				matResource->GetMaterial()->SetTexture(propertyId, nullptr);
 			}
+			matResource->SetDirty(true);
 			
 		}
 	}

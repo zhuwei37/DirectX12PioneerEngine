@@ -21,6 +21,7 @@ public:
 	IResource* CreateResource(ResourceType type, ResourceID parentId, std::string& pathStr);
 	
 	bool DeleteResource(ResourceID& id,ResourceID& parentId);
+	void Save();
 private:
 	void DeleteResourceChildren(IResource*);
 	void init();
@@ -28,6 +29,8 @@ private:
 	void registerProcessor();
 	void registerInMemeryResource();
 	void LoadAsset(boost::filesystem::path& path, std::shared_ptr<FolderResource>  folder);
+
+	
 	std::shared_ptr<IResource> LoadResource(boost::filesystem::path& path);
 	
 	ResourceManager* mResourceManager;

@@ -115,21 +115,23 @@ namespace Editor.ViewModel.Info
             }
             return parent;
         }
-        private string getNewResourceName(string parentPath,string defaultName,bool isFile=false)
+        private string getNewResourceName(string parentPath,string defaultName, string extension , bool isFile=false )
         {
             string newName = defaultName;
             string path = "";
             for (int i = 1; i < 200; i++)
             {
-                path = System.IO.Path.Join(parentPath, $"{newName}{i}");
+               
                 bool hasFolder;
                 if (isFile)
                 {
+                    path = System.IO.Path.Join(parentPath, $"{newName}{i}.{extension}");
                     hasFolder =System.IO.File.Exists(path);
                 }
                 else
                 {
-                    hasFolder=System.IO.Directory.Exists(path);
+                    path = System.IO.Path.Join(parentPath, $"{newName}{i}");
+                    hasFolder =System.IO.Directory.Exists(path);
                 }
 
                 if (!hasFolder)

@@ -277,6 +277,25 @@ void ResourceSystem::LoadAssetRoot()
 	}*/
 
 }
+
+void ResourceSystem::Save()
+{
+	for (auto& pair : this->mResourceManager->mResourceMap)
+	{
+		auto resource = pair.second;
+		if (!resource->IsInMemory() && resource->GetDirty() && resource->GetResourceType() == ResourceType::MATERIAL)
+		{
+			auto materialResource = std::dynamic_pointer_cast<MaterialResource>(resource);
+			if (materialResource != nullptr)
+			{
+				auto processor = (MaterialProcessor*)this->ResourceProcessorMap[ResourceType::MATERIAL];
+				processor->SaveResource(resource);
+				materialResource->SetDirty(false);
+			}
+		}
+	}
+}
+
 void ResourceSystem::LoadAsset(boost::filesystem::path& path, std::shared_ptr<FolderResource> parentFolder)
 {
 	auto parentId = parentFolder->GetId();

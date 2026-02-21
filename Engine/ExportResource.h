@@ -12,4 +12,8 @@ extern "C"
 
 	DLL_EXPORTS int GetInMemeryResourceCount();
 	DLL_EXPORTS bool GetAllInMemeryResourceInfos(ResourceInfo*, __inout int& size);
+
+
+	DLL_EXPORTS void Save();
+
 }

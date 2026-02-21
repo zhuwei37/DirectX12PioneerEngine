@@ -15,6 +15,9 @@
             <Setter Property="Height" Value="40"/>
         </Style>
     </Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding SaveCommand}" Gesture="Ctrl+S"/>
+    </Window.InputBindings>
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>

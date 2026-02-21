@@ -2,9 +2,9 @@
 #include"FileSystem.h"
 #include"IResource.h"
 #include"GUIDHelper.h"
-#include"nlohmann/json.hpp"
 #include"TextureResource.h"
 #include"EngineManager.h"
+#include"yaml-cpp/emitter.h"
 boost::filesystem::path TextureProcessor::GetDescriptionFilePath(boost::filesystem::path& path)
 {
     boost::filesystem::path curPath = path;
@@ -31,9 +31,13 @@ std::shared_ptr<IResource> TextureProcessor::LoadResource(boost::filesystem::pat
 		{
 			auto id = IResource::NewID();
 			auto guid = GUIDHelper::ResourceIdToString(id);
-			nlohmann::json meta;
-			meta["resourceid"] = guid;
-			auto metaString = meta.dump();
+
+			YAML::Emitter out;
+			out << YAML::BeginMap;
+			out << YAML::Key << "resourceid";
+			out << YAML::Value << guid;
+			out << YAML::EndMap;
+			auto metaString =out.c_str();
 			FileSystem::WriteFile(descriptionFilePath, metaString);
 		}
 		else
@@ -41,10 +45,11 @@ std::shared_ptr<IResource> TextureProcessor::LoadResource(boost::filesystem::pat
 			return nullptr;
 		}
     }
+
 	std::string data;
 	data = FileSystem::ReadFile(descriptionFilePath);
-	auto meta = nlohmann::json::parse(data);
-	auto guidStr = meta["resourceid"];
+	auto meta = YAML::Load(data);
+	auto guidStr = meta["resourceid"].as<std::string>();
 	auto guid = GUIDHelper::StringToResourceId(guidStr);
 	auto pathstring = path.string();
 	auto name= path.filename().string();

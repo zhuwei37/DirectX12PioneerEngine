@@ -114,4 +114,8 @@ bool GetAllInMemeryResourceInfos(ResourceInfo* infos,__inout int& size)
 	size = 0;
 	return false;
 }
+void Save()
+{
+	EngineManager::Get()->GetResourceSystem()->Save();
+}
 

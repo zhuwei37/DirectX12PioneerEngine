@@ -59,32 +59,34 @@ private:
 		UINT offset = 0;
 
 		id = ShaderProperty::PropertyToID("gDiffuseAlbedo");
-		ShaderValue<DirectX::XMFLOAT4>* DiffuseAlbedon = new  ShaderValue<DirectX::XMFLOAT4>(offset, ShaderValueType::Float4);
+		ShaderValue<DirectX::XMFLOAT4>* DiffuseAlbedon = new  ShaderValue<DirectX::XMFLOAT4>(offset, ShaderValueType::Float4, id);
 		DiffuseAlbedon->SetUploadGraphicsData(data.get());
 		offset += sizeof(DirectX::XMFLOAT4);
 		shaderValueMap[id] = DiffuseAlbedon;
 
 		id = ShaderProperty::PropertyToID("gFresnelR0");
-		ShaderValue<DirectX::XMFLOAT3>* FresnelR0 = new ShaderValue<DirectX::XMFLOAT3>(offset, ShaderValueType::Float3);
+		ShaderValue<DirectX::XMFLOAT3>* FresnelR0 = new ShaderValue<DirectX::XMFLOAT3>(offset, ShaderValueType::Float3, id);
 		FresnelR0->SetUploadGraphicsData(data.get());
 		offset += sizeof(DirectX::XMFLOAT3);
 		shaderValueMap[id] = FresnelR0;
 
 
 		id = ShaderProperty::PropertyToID("gRoughness");
-		ShaderValue<float>* Roughness = new ShaderValue<float>(offset, ShaderValueType::Float);
+		ShaderValue<float>* Roughness = new ShaderValue<float>(offset, ShaderValueType::Float, id);
 		Roughness->SetUploadGraphicsData(data.get());
 		offset += sizeof(float);
 		shaderValueMap[id] = Roughness;
 		auto rs = ShaderManager::Get()->GetRenderShader(DEFERRED_RENDER_SHADER_ID);
 		Descriptor d = mGDevice->CBV_SRV_UAV_Shader_Visible_DescriptorHeapAllocator->Allocator(2);
 
-		ShaderTextureValue* stv = new ShaderTextureValue(mGDevice, d, 0);
 		id = ShaderProperty::PropertyToID("MainTex");
+		ShaderTextureValue* stv = new ShaderTextureValue(mGDevice, d, 0,id);
+		
 		shaderValueMap[id] = stv;
 
-		ShaderTextureValue* normalTex = new ShaderTextureValue(mGDevice, d, 1);
 		id = ShaderProperty::PropertyToID("NormalTex");
+		ShaderTextureValue* normalTex = new ShaderTextureValue(mGDevice, d, 1, id);
+		
 		shaderValueMap[id] = normalTex;
 
 		std::shared_ptr<ShaderProperties> ShaderPropertiess = std::make_shared<ShaderProperties>(data, shaderValueMap);
@@ -103,7 +105,7 @@ private:
 		UINT offset = 0;
 
 		id = ShaderProperty::PropertyToID("gColor");
-		ShaderValue<DirectX::XMFLOAT4>* gColor = new  ShaderValue<DirectX::XMFLOAT4>(offset, ShaderValueType::Float4);
+		ShaderValue<DirectX::XMFLOAT4>* gColor = new  ShaderValue<DirectX::XMFLOAT4>(offset, ShaderValueType::Float4,id);
 		gColor->SetUploadGraphicsData(data.get());
 		offset += sizeof(DirectX::XMFLOAT4);
 		shaderValueMap[id] = gColor;
@@ -127,8 +129,9 @@ private:
 		
 		auto rs = ShaderManager::Get()->GetRenderShader(SKYBOX_RENDER_SHADER_ID);
 		Descriptor d = mGDevice->CBV_SRV_UAV_Shader_Visible_DescriptorHeapAllocator->Allocator(1);
-		ShaderTextureValue* stv = new ShaderTextureValue(mGDevice, d, 0);
 		ShaderPropertyID skyMapid = ShaderProperty::PropertyToID("EnvironmentMapping");
+		ShaderTextureValue* stv = new ShaderTextureValue(mGDevice, d, 0, skyMapid);
+		
 		shaderValueMap[skyMapid] = stv;
 
 
@@ -148,31 +151,32 @@ private:
 		UINT offset = 0;
 
 		id = ShaderProperty::PropertyToID("gDiffuseAlbedo");
-		ShaderValue<DirectX::XMFLOAT4>* DiffuseAlbedon = new  ShaderValue<DirectX::XMFLOAT4>(offset, ShaderValueType::Float4);
+		ShaderValue<DirectX::XMFLOAT4>* DiffuseAlbedon = new  ShaderValue<DirectX::XMFLOAT4>(offset, ShaderValueType::Float4,id);
 		DiffuseAlbedon->SetUploadGraphicsData(data.get());
 		offset += sizeof(DirectX::XMFLOAT4);
 		shaderValueMap[id] = DiffuseAlbedon;
 
 		id = ShaderProperty::PropertyToID("gFresnelR0");
-		ShaderValue<DirectX::XMFLOAT3>* FresnelR0 = new ShaderValue<DirectX::XMFLOAT3>(offset, ShaderValueType::Float3);
+		ShaderValue<DirectX::XMFLOAT3>* FresnelR0 = new ShaderValue<DirectX::XMFLOAT3>(offset, ShaderValueType::Float3,id);
 		FresnelR0->SetUploadGraphicsData(data.get());
 		offset += sizeof(DirectX::XMFLOAT3);
 		shaderValueMap[id] = FresnelR0;
 
 
 		id = ShaderProperty::PropertyToID("gRoughness");
-		ShaderValue<float>* Roughness = new ShaderValue<float>(offset, ShaderValueType::Float);
+		ShaderValue<float>* Roughness = new ShaderValue<float>(offset, ShaderValueType::Float,id);
 		Roughness->SetUploadGraphicsData(data.get());
 		offset += sizeof(float);
 		shaderValueMap[id] = Roughness;
 		Descriptor d = mGDevice->CBV_SRV_UAV_Shader_Visible_DescriptorHeapAllocator->Allocator(2);
 
-		ShaderTextureValue* stv = new ShaderTextureValue(mGDevice, d, 0);
 		id = ShaderProperty::PropertyToID("MainTex");
+		ShaderTextureValue* stv = new ShaderTextureValue(mGDevice, d, 0,id);
+		
 		shaderValueMap[id] = stv;
 
-		ShaderTextureValue* normalTex = new ShaderTextureValue(mGDevice, d, 1);
 		id = ShaderProperty::PropertyToID("NormalTex");
+		ShaderTextureValue* normalTex = new ShaderTextureValue(mGDevice, d, 1,id);
 		shaderValueMap[id] = normalTex;
 
 		auto rs = ShaderManager::Get()->GetRenderShader(DEFERRED_RENDER_SHADER_ID);
@@ -204,20 +208,20 @@ private:
 		auto rs = ShaderManager::Get()->GetRenderShader(PBR_DEFERRED_RENDER_SHADER_ID);
 		std::map<ShaderPropertyID, IShaderValue*> shaderValueMap;
 		auto d = mGDevice->CBV_SRV_UAV_Shader_Visible_DescriptorHeapAllocator->Allocator(4);
-		
-		ShaderTextureValue* baseColorTex = new ShaderTextureValue(mGDevice, d, 0);
+
 		ShaderPropertyID propertyId = ShaderProperty::PropertyToID("BaseColorTex");
+		ShaderTextureValue* baseColorTex = new ShaderTextureValue(mGDevice, d, 0, propertyId);
 		shaderValueMap[propertyId] = baseColorTex;
 
-		ShaderTextureValue* normalTex = new ShaderTextureValue(mGDevice, d, 1);
+		ShaderTextureValue* normalTex = new ShaderTextureValue(mGDevice, d, 1, propertyId);
 		propertyId = ShaderProperty::PropertyToID("NormalTex");
 		shaderValueMap[propertyId] = normalTex;
 
-		ShaderTextureValue* metallicTex = new ShaderTextureValue(mGDevice, d, 2);
+		ShaderTextureValue* metallicTex = new ShaderTextureValue(mGDevice, d, 2, propertyId);
 		propertyId = ShaderProperty::PropertyToID("MetallicTex");
 		shaderValueMap[propertyId] = metallicTex;
 
-		ShaderTextureValue* roughness = new ShaderTextureValue(mGDevice, d, 3);
+		ShaderTextureValue* roughness = new ShaderTextureValue(mGDevice, d, 3, propertyId);
 		propertyId = ShaderProperty::PropertyToID("RoughnessTex");
 		shaderValueMap[propertyId] = roughness;
 

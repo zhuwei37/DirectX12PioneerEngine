@@ -41,7 +41,7 @@ namespace Editor.ViewModel.Info
            var parent= getResourceParent(parentResource);
             if (parent != null) 
             {
-                string newName = getNewResourceName(parent.Path, "Material",isFile:true);
+                string newName = getNewResourceName(parent.Path, "Material","Mat",isFile:true);
                 if (ResourceManager.Instance.CreateResource(RenderDx.ResourceType.MATERIAL, parent, newName))
                 {
                     RefreshFolderChildrenView(parent);

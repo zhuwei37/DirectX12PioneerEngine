@@ -15,6 +15,12 @@ public:
 	std::shared_ptr<IResource> CreateResource()override;
 	std::shared_ptr<IResource> CreateResource(boost::filesystem::path& path) override;
 	std::shared_ptr<IResource> LoadResource(boost::filesystem::path& path, ResourceManager*) override;
+	void SaveResource(std::shared_ptr<IResource> resource) override;
+	void SerializeShaderValue(YAML::Emitter& out, IShaderValue* ptr, Material* mat);
+
+	std::string Serialization(std::shared_ptr<IResource> resource);
+	std::shared_ptr<IResource> Deserialization(std::string&,std::shared_ptr<MaterialResource> materialResource);
+
 	void DeleteResource(IResource*) override;
 	bool DeleteResource(boost::filesystem::path& path) override;
 	boost::filesystem::path GetDescriptionFilePath(boost::filesystem::path& path)

@@ -1,5 +1,6 @@
 #include"ResourceManager.h"
 #include"interface_resource.h"
+#include"MaterialResource.h"
 ResourceManager::ResourceManager()
 {
 
@@ -61,7 +62,10 @@ bool ResourceManager::DeleteResouce(ResourceID& resourceId)
 	return true;
 }
 
-
+void ResourceManager::Save()
+{
+	
+}
 int ResourceManager::GetInMemeryResourceCount()
 {
 	return this->mResourceInMemoryMap.size();

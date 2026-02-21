@@ -49,6 +49,19 @@ std::string FileSystem::ReadFile(boost::filesystem::path& path)
 	}
 	return "";
 }
+void FileSystem::WriteFile(boost::filesystem::path& path, const char* str)
+{
+	bool exist = IsExist(path);
+	if (exist)
+	{
+		bool isFile = IsFile(path);
+		if (isFile)
+		{
+			std::ofstream ofs(path.string());
+			ofs << str;
+		}
+	}
+}
 void FileSystem::WriteFile(boost::filesystem::path& path, std::string& str)
 {
 	bool exist = IsExist(path);

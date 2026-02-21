@@ -64,24 +64,27 @@ class IShaderValue
 public:
 	IShaderValue() {}
 	virtual ShaderValueType GetShaderValueType() = 0;
-	virtual ShaderPropertyID GetShaderPropertyID() { return this->ShaderPropertyID; }
+	virtual ShaderPropertyID GetShaderPropertyID() = 0;
 protected:
-	ShaderPropertyID ShaderPropertyID;
+
 	
 };
 class ShaderTextureValue :public IShaderValue
 {
+	
 public:
 	ShaderValueType GetShaderValueType()
 	{
 		return ShaderValueType::_Texture;
 	}
+	ShaderPropertyID GetShaderPropertyID() { return this->mShaderPropertyID; }
 	
-	ShaderTextureValue(GraphicsDevice* gDevice,Descriptor descriptor,int textureInDescriptorIndex) 
+	ShaderTextureValue(GraphicsDevice* gDevice,Descriptor descriptor,int textureInDescriptorIndex, ShaderPropertyID shaderPropertyID)
 	{
 		this->mGDevice = gDevice;
 		this->mTextureDescriptor = descriptor;
 		this->mTextureInDescirptorIndex = textureInDescriptorIndex;
+		this->mShaderPropertyID = shaderPropertyID;
 	}
 	void SetTexture(Texture* tex)
 	{
@@ -116,6 +119,8 @@ public:
 		
 	}
 private:
+
+	ShaderPropertyID mShaderPropertyID = 0;
 	/// <summary>
 	/// Œ∆¿Ì√Ë ˆ∑˚∂— 
 	/// </summary>
@@ -128,7 +133,7 @@ class ShaderValue :public IShaderValue
 {
 public :
 	
-
+	ShaderPropertyID GetShaderPropertyID() { return this->mShaderPropertyID; }
 	ShaderValueType GetShaderValueType()
 	{
 		return mType;
@@ -147,17 +152,17 @@ public :
 		}
 	}
 	
-	ShaderValue(UploadGraphicsData* uploadData,T defaultValue,UINT offset,ShaderValueType type) :
+	ShaderValue(UploadGraphicsData* uploadData,T defaultValue,UINT offset,ShaderValueType type, ShaderPropertyID shaderPropertyID) :
 		mUploadData(uploadData),
 		mOffset(offset),
-		mType(type)
+		mType(type),
+		mShaderPropertyID(shaderPropertyID)
 	{
 		SetValue(defaultValue);
 	}
-	ShaderValue(UINT offset, ShaderValueType type) :
-
-		mOffset(offset)
-
+	ShaderValue(UINT offset, ShaderValueType type, ShaderPropertyID shaderPropertyID) :
+		mOffset(offset),
+		mShaderPropertyID(shaderPropertyID)
 	{
 		mType = type;
 	}
@@ -166,6 +171,7 @@ public :
 		mUploadData = uploadData;
 	}
 private:
+	ShaderPropertyID mShaderPropertyID = 0;
 	 UploadGraphicsData* mUploadData;
 	 T mValue;
 	 ShaderValueType mType;
