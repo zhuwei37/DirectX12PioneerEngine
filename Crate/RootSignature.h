@@ -14,8 +14,9 @@ public:
 	void AddUavDescriptorTable(int numDescriptor) = delete;
 	void AddCbvDescriptorTable() = delete;
 	void AddConstantBufferView();
+	void AddConstants(int num32BitValues);
 	void AddShaderResourceView();
-	std::array<const CD3DX12_STATIC_SAMPLER_DESC, 7> GetStaticSamplers();
+	std::array<const CD3DX12_STATIC_SAMPLER_DESC, 8> GetStaticSamplers();
 	ID3D12RootSignature* GetRootSig();
 private:
 	int mCurrentCBVBuildIndex=0;

@@ -34,6 +34,14 @@ void ShaderManager::init()
 	mShaderDataMap["VS_ShadowMap"] = LoadShaderData("..\\..\\Shaders\\ShadowVS.hlsl", "VSMain", "vs_5_0");
 
 
+	mShaderDataMap["PS_SSAO"] = LoadShaderData("..\\..\\Shaders\\Ssao.hlsl", "PSMain", "ps_5_0");
+	mShaderDataMap["VS_SSAO"] = LoadShaderData("..\\..\\Shaders\\Ssao.hlsl", "VSMain", "vs_5_0");
+
+	mShaderDataMap["PS_FXAA"] = LoadShaderData("..\\..\\Shaders\\Fxaa.hlsl", "PSMain", "ps_5_0");
+
+
+	mShaderDataMap["VS_ScreenQuad_1"] = LoadShaderData("..\\..\\Shaders\\ScreenQuad_1_VS", "VSMain", "vs_5_0");
+
 	LoadShaders();
 	LoadRenderShaders();
 }
@@ -223,6 +231,38 @@ void ShaderManager::LoadShaders()
 		};
 		mShadersMap[SHADOW_MAP_SHADER_ID] = shadowMapShaders;
 	}
+#pragma endregion
+
+#pragma region SSAO
+	{
+		std::shared_ptr<Shaders> SsaoShaders = std::make_shared<Shaders>();
+		SsaoShaders->VS =
+		{
+			reinterpret_cast<BYTE*>(mShaderDataMap["VS_SSAO"]->GetBufferPointer()),
+			mShaderDataMap["VS_SSAO"]->GetBufferSize()
+		};
+		SsaoShaders->PS =
+		{
+			reinterpret_cast<BYTE*>(mShaderDataMap["PS_SSAO"]->GetBufferPointer()),
+			mShaderDataMap["PS_SSAO"]->GetBufferSize()
+		};
+
+		mShadersMap[SSAO_SHADER_ID] = SsaoShaders;
+	}
+#pragma endregion
+#pragma region FXAA
+	std::shared_ptr<Shaders> FxaaShaders = std::make_shared<Shaders>();
+	FxaaShaders->VS =
+	{
+		reinterpret_cast<BYTE*>(mShaderDataMap["VS_ScreenQuad_1"]->GetBufferPointer()),
+		mShaderDataMap["VS_ScreenQuad_1"]->GetBufferSize()
+	};
+	FxaaShaders->PS =
+	{
+		reinterpret_cast<BYTE*> (mShaderDataMap["PS_FXAA"]->GetBufferPointer()),
+		mShaderDataMap["PS_FXAA"]->GetBufferSize()
+	};
+	mShadersMap[FXAA_SHADER_ID] = FxaaShaders;
 #pragma endregion
 
 
@@ -473,6 +513,59 @@ void ShaderManager::LoadRenderShaders()
 		shadowMapRenderShader->mShaderPasses = shadowMapPasses;
 
 		mRenderShaderMap[SHADOW_MAP_RENDER_SHADER_ID] = shadowMapRenderShader;
+	}
+#pragma endregion
+
+#pragma region SSAO
+	{
+		auto SsaoShader = this->GetShaders(SSAO_SHADER_ID);
+		auto SsaoRootSignature = std::make_shared<RootSignature>(GDevice, 5);
+		SsaoRootSignature->AddConstantBufferView();
+		SsaoRootSignature->AddConstants(1);
+		SsaoRootSignature->AddSrvDescriptorTable(1);
+		SsaoRootSignature->AddSrvDescriptorTable(1);
+		SsaoRootSignature->AddSrvDescriptorTable(1);
+		SsaoRootSignature->Build();
+		auto ssaoPiplineState = std::make_shared<PipelineState>(GDevice);
+		ssaoPiplineState->SetEnableDepth(false);
+		ssaoPiplineState->SetDepthWriteMask(D3D12_DEPTH_WRITE_MASK_ZERO);
+		std::vector<DXGI_FORMAT> ssaoRtvFormat = { DXGI_FORMAT_R16_UNORM };
+		ssaoPiplineState->SetRtvFormat(ssaoRtvFormat);
+		ssaoPiplineState->SetDsvFormat(DXGI_FORMAT_UNKNOWN);
+		ssaoPiplineState->Build(SsaoRootSignature, SsaoShader.get());
+
+		std::vector<ShaderPass> SsaoPasses;
+		ShaderPass SsaoPass(ssaoPiplineState);
+		SsaoPasses.push_back(SsaoPass);
+		std::shared_ptr<RenderShader> SsaoRenderShader = std::make_shared<RenderShader>();
+		SsaoRenderShader->mRootSignature = SsaoRootSignature;
+		SsaoRenderShader->mShaderPasses = SsaoPasses;
+		mRenderShaderMap[SSAO_RENDER_SHADER_ID] = SsaoRenderShader;
+
+	}
+#pragma endregion
+#pragma region FXAA_Console
+	{
+		auto FxaaShader = this->GetShaders(FXAA_SHADER_ID);
+		auto FxaaRootSignature = std::make_shared<RootSignature>(GDevice, 2);
+		FxaaRootSignature->AddConstantBufferView();
+		FxaaRootSignature->AddSrvDescriptorTable(1);
+		FxaaRootSignature->Build();
+
+		auto fxaaPiplineState = std::make_shared<PipelineState>(GDevice);
+		fxaaPiplineState->SetEnableDepth(false);
+		fxaaPiplineState->SetDepthWriteMask(D3D12_DEPTH_WRITE_MASK_ZERO);
+
+		fxaaPiplineState->SetDsvFormat(DXGI_FORMAT_UNKNOWN);
+		fxaaPiplineState->Build(FxaaRootSignature, FxaaShader.get());
+
+		std::vector<ShaderPass> FxaaPasses;
+		ShaderPass FxaaPass(fxaaPiplineState);
+		FxaaPasses.push_back(FxaaPass);
+		std::shared_ptr<RenderShader> FxaaRenderShader = std::make_shared<RenderShader>();
+		FxaaRenderShader->mRootSignature = FxaaRootSignature;
+		FxaaRenderShader->mShaderPasses = FxaaPasses;
+		mRenderShaderMap[FXAA_CONSOLE_RENDER_SHADER_ID] = FxaaRenderShader;
 	}
 #pragma endregion
 

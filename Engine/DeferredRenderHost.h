@@ -6,6 +6,8 @@
 #include"MaterialContexts.h"
 #include"ShadowMapController.h"
 #include"ShadowMap.h"
+#include"SSAOController.h"
+#include"FxaaController.h"
 class DeferredRenderHost:public RenderHost
 {
 
@@ -61,9 +63,12 @@ private:
 	void RenderGBuffer();
 	void RenderLight();
 	void RenderSkyBox();
+	void RenderSsao();
+	void PostProcess();
 	void RenderWorldPosQuad();
 	void PreRender(std::map<Layer, RendererList>& renderers, SkyBox* skybox)override;
 
+	void DepthStencilResouceBindDescriptor();
 
 
 	void DrawMesh(Mesh* mesh);
@@ -82,6 +87,11 @@ private:
 
 	std::shared_ptr<MaterialContext> shadowMapMaterialContext;
 
+	Descriptor mDepthSrvDescriptor;
+	std::shared_ptr<ShaderResourceView> mDepthSrv;
+
+	std::shared_ptr<SSAOController> mSSAOController;
+	std::shared_ptr<FxaaController> mFxaaController;
 
 	std::shared_ptr<MaterialContext> skyBoxMaterialContext;
 

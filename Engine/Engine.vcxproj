@@ -38,6 +38,7 @@
     <ClInclude Include="FileSystem.h" />
     <ClInclude Include="FolderProcessor.h" />
     <ClInclude Include="FolderResource.h" />
+    <ClInclude Include="FxaaController.h" />
     <ClInclude Include="GBufferController.h" />
     <ClInclude Include="GUIDHelper.h" />
     <ClInclude Include="IComponent.h" />
@@ -73,6 +74,7 @@
     <ClInclude Include="ShadowMap.h" />
     <ClInclude Include="ShadowMapController.h" />
     <ClInclude Include="SkyBox.h" />
+    <ClInclude Include="SSAOController.h" />
     <ClInclude Include="String.h" />
     <ClInclude Include="tamplates.h" />
     <ClInclude Include="TextureProcessor.h" />
@@ -95,6 +97,7 @@
     <ClCompile Include="ExportScene.cpp" />
     <ClCompile Include="FileSystem.cpp" />
     <ClCompile Include="FolderProcessor.cpp" />
+    <ClCompile Include="FxaaController.cpp" />
     <ClCompile Include="IComponent.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="MaterialProcessor.cpp" />
@@ -116,6 +119,7 @@
     <ClCompile Include="ShadowMap.cpp" />
     <ClCompile Include="ShadowMapController.cpp" />
     <ClCompile Include="SkyBox.cpp" />
+    <ClCompile Include="SSAOController.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="TextureProcessor.cpp" />
     <ClCompile Include="Transform.cpp" />

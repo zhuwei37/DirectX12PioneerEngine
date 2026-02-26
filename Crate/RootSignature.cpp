@@ -17,6 +17,12 @@ void RootSignature::AddConstantBufferView()
 		mSlotRootPrameter[mCurrentRootParameterIndex++] = param;
 	//}
 }
+void RootSignature::AddConstants(int num32BitValues)
+{
+	CD3DX12_ROOT_PARAMETER param;
+	param.InitAsConstants(num32BitValues, mCurrentCBVBuildIndex++);
+	mSlotRootPrameter[mCurrentRootParameterIndex++] = param;
+}
 void RootSignature::AddShaderResourceView()
 {
 	CD3DX12_ROOT_PARAMETER param;
@@ -75,7 +81,7 @@ ID3D12RootSignature* RootSignature::GetRootSig()
 	return mRootSig.Get();
 }
 
- std::array<const CD3DX12_STATIC_SAMPLER_DESC, 7> RootSignature::GetStaticSamplers()
+ std::array<const CD3DX12_STATIC_SAMPLER_DESC, 8> RootSignature::GetStaticSamplers()
 {
 	 const CD3DX12_STATIC_SAMPLER_DESC pointWrap(
 		 0, // shaderRegister
@@ -132,8 +138,19 @@ ID3D12RootSignature* RootSignature::GetRootSig()
 		 16,                                 // maxAnisotropy
 		 D3D12_COMPARISON_FUNC_LESS_EQUAL,
 		 D3D12_STATIC_BORDER_COLOR_OPAQUE_BLACK);
+	 const CD3DX12_STATIC_SAMPLER_DESC depthMapSam(
+		 7, // shaderRegister
+		 D3D12_FILTER_MIN_MAG_MIP_LINEAR, // filter
+		 D3D12_TEXTURE_ADDRESS_MODE_BORDER,  // addressU
+		 D3D12_TEXTURE_ADDRESS_MODE_BORDER,  // addressV
+		 D3D12_TEXTURE_ADDRESS_MODE_BORDER,  // addressW
+		 0.0f,
+		 0,
+		 D3D12_COMPARISON_FUNC_LESS_EQUAL,
+		 D3D12_STATIC_BORDER_COLOR_OPAQUE_WHITE);
+
 	 return {
 		 pointWrap, pointClamp,
 		 linearWrap, linearClamp,
-		 anisotropicWrap, anisotropicClamp ,shadow };
+		 anisotropicWrap, anisotropicClamp ,shadow ,depthMapSam };
 }

@@ -44,6 +44,15 @@ public:
 		{
 			return GetShadowMapMaterialContext(dev);
 		}
+		case SSAO_RENDER_SHADER_ID:
+		{
+			return GetSSAOMaterialContext(dev);
+		}
+		case FXAA_CONSOLE_RENDER_SHADER_ID:
+		{
+			return GetFxaaConsoleMaterialContext(dev);
+
+		}
 		default:
 			break;
 		}
@@ -230,4 +239,17 @@ private:
 		auto renderContext = std::make_shared<MaterialContext>(rs, ShaderPropertiess,d);
 		return renderContext;
 	}
+	static std::shared_ptr<MaterialContext> GetSSAOMaterialContext(GraphicsDevice* mGDevice)
+	{
+		auto rs = ShaderManager::Get()->GetRenderShader(SSAO_RENDER_SHADER_ID);
+		auto renderContext = std::make_shared<MaterialContext>(rs, nullptr, Descriptor{ 0 });
+		return renderContext;
+	}
+	static std::shared_ptr<MaterialContext> GetFxaaConsoleMaterialContext(GraphicsDevice* mGDevice)
+	{
+		auto rs = ShaderManager::Get()->GetRenderShader(FXAA_CONSOLE_RENDER_SHADER_ID);
+		auto renderShaderContext = std::make_shared<MaterialContext>(rs, nullptr, Descriptor{ 0 });
+		return renderShaderContext;
+	}
+
 };

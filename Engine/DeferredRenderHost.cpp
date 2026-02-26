@@ -23,18 +23,23 @@ DeferredRenderHost::DeferredRenderHost(GraphicsDevice* GDevice, CreateRenderHost
 	this->mSkyBoxMat = mat->GetMaterial();
 
 	mShadowMapController = std::make_shared<ShadowMapController>(GDevice);
-	mShadowMap = std::make_shared<ShadowMap>(GDevice->mD3dDevice.Get(), 2048, 2048);
+	mDepthSrvDescriptor = mGDevice->CBV_SRV_UAV_Shader_Visible_DescriptorHeapAllocator->Allocator(1);
+	//mShadowMap = std::make_shared<ShadowMap>(GDevice->mD3dDevice.Get(), 2048, 2048);
 	
+	//环境光遮蔽
+	mSSAOController = std::make_shared<SSAOController>( param->Width, param->Height, mGDevice);
 
+	//快速抗锯齿
+	mFxaaController = std::make_shared<FxaaController>(mGDevice, param->Width, param->Height);
 	mSkybox = std::make_shared<SkyBox>();
 	
+	
+	/*auto dsvHandle = GDevice->DsvDescriptorHeapAllocator->Allocator(1);
+	auto srvHandle = GDevice->CBV_SRV_UAV_Shader_Visible_DescriptorHeapAllocator->Allocator(1);*/
 
-	auto dsvHandle = GDevice->DsvDescriptorHeapAllocator->Allocator(1);
-	auto srvHandle = GDevice->CBV_SRV_UAV_Shader_Visible_DescriptorHeapAllocator->Allocator(1);
-
-	mShadowMap->BuildDescriptors(CD3DX12_CPU_DESCRIPTOR_HANDLE(srvHandle.CpuHandle),
-		CD3DX12_GPU_DESCRIPTOR_HANDLE(srvHandle.GpuHandle),
-		CD3DX12_CPU_DESCRIPTOR_HANDLE (dsvHandle.CpuHandle));
+	//mShadowMap->BuildDescriptors(CD3DX12_CPU_DESCRIPTOR_HANDLE(srvHandle.CpuHandle),
+	//	CD3DX12_GPU_DESCRIPTOR_HANDLE(srvHandle.GpuHandle),
+	//	CD3DX12_CPU_DESCRIPTOR_HANDLE (dsvHandle.CpuHandle));
 	mSceneBounds.Center = DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f);
 	mSceneBounds.Radius = sqrtf(10.0f * 10.0f + 15.0f * 15.0f);
 
@@ -57,7 +62,7 @@ void DeferredRenderHost::PreRender(std::map<Layer, RendererList>& renderers, Sky
 	DirectX::XMStoreFloat4x4(&this->mCommonPass.ShadowTransform, DirectX::XMMatrixTranspose(shadowTransform));
 	this->mCommonPassConstantsRenderData.SetData(0, this->mCommonPass);
 	
-
+	this->mSSAOController->UpdateConstantBuffer(this->mCommonPass);
 	
 
 
@@ -87,7 +92,14 @@ void DeferredRenderHost::CreateScreenQuadMesh()
 	this->ScreenQuadMesh = std::make_shared<Mesh>(screen, mGDevice);
 
 }
-
+void DeferredRenderHost::PostProcess()
+{
+	this->mFxaaController->PreRender(this->mCommandList.Get());
+	CD3DX12_GPU_DESCRIPTOR_HANDLE handle = CD3DX12_GPU_DESCRIPTOR_HANDLE(MRT_SrvDescriptorHandle.GpuHandle);
+	handle.Offset(GBufferRTVOrder::Light * mGDevice->CBV_SRV_UAV_DescriptorSize);
+	this->mFxaaController->OnRender(this->mCommandList.Get(), handle);
+	this->mFxaaController->EndRender(this->mCommandList.Get());
+}
 
 
 //渲染
@@ -108,15 +120,20 @@ ComPtr<ID3D12GraphicsCommandList> DeferredRenderHost::OnRender()
 	commandList->SetDescriptorHeaps(_countof(descriptorHeaps), descriptorHeaps);
 	RenderShadowMap();
 	RenderGBuffer();
-
+//	RenderSsao();
 	RenderLight();
 	RenderSkyBox();
+
 	for (int i = GBufferRTVOrder::Light; i < GBufferRTVOrder::Length; i++)
 	{
 		D3D12_RESOURCE_BARRIER mrtResourceBar = CD3DX12_RESOURCE_BARRIER::Transition(this->MRTResources[i]->NavigateResource(),
 			D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_GENERIC_READ);
 		this->mCommandList->ResourceBarrier(1, &mrtResourceBar);
 	}
+
+	//PostProcess();
+
+	
 	////设置视口
 	commandList->RSSetViewports(1, &mViewPort);
 	commandList->RSSetScissorRects(1, &mRect);
@@ -153,72 +170,7 @@ ComPtr<ID3D12GraphicsCommandList> DeferredRenderHost::OnRender()
 /// </summary>
 void DeferredRenderHost::RenderSkyBox()
 {
-	//auto handle2 = CD3DX12_CPU_DESCRIPTOR_HANDLE(MRT_RtvDescriptorHandle.CpuHandle);
-	//handle2.Offset(GBufferRTVOrder::Light * mGDevice->RTV_DescriptorSize);
-	//auto dsv = this->mDsv->GetCPUView();
-	//this->mCommandList->OMSetRenderTargets(1, &handle2, true, &dsv);
-
-
-
-	//auto mesh = this->mSkybox->GetMesh();
-	//if (mesh == nullptr || mesh->SubMeshes.size() < 0)
-	//{
-	//	return;
-	//}
-	//
-	////设置顶点 顶点索引
-	//auto vbv = mesh->VertexBufferView();
-	//this->mCommandList->IASetVertexBuffers(0, 1, &vbv);
-	//auto ibv = mesh->IndexBufferView();
-	//this->mCommandList->IASetIndexBuffer(&ibv);
-	//this->mCommandList->IASetPrimitiveTopology(mesh->PrimitiveTopology);
-	//for (int i = 0; i < mesh->SubMeshes.size(); i++)
-	//{
-	//	auto subMesh = mesh->SubMeshes[i];
-	//	//启用默认材质
-	//	
-	//	
-	//	{
-	//		auto mat = this->mSkyBoxMat;
-	//		if (mat == nullptr)
-	//		{
-	//			continue;
-	//		}
-	//		auto gMat = mat->GetGMat();
-	//		if (gMat != nullptr)
-	//		{
-
-	//			auto rootSignature = gMat->mRenderShader->mRootSignature;
-	//			if (rootSignature == nullptr)
-	//			{
-	//				continue;
-	//			}
-	//			this->mCommandList->SetGraphicsRootSignature(rootSignature->GetRootSig());
-	//			//固定参数
-	//			//裁剪矩阵、环境光
-	//			this->mCommandList->SetGraphicsRootConstantBufferView(0, this->mCommonPassConstantsRenderData.NavigateResource()->GetGPUVirtualAddress());
-	//			//光源
-	//			this->mCommandList->SetGraphicsRootConstantBufferView(1, this->mCommonLightRenderData.NavigateResource()->GetGPUVirtualAddress());
-
-
-	//			auto size = (sizeof(ObjectPassConstants) + 255) & ~255;
-	//			this->mCommandList->SetGraphicsRootConstantBufferView(2
-	//				, this->mCommonObjectPassContantsRenderData.NavigateResource()
-	//				->GetGPUVirtualAddress() + this->mSkyObjIndex * size);
-	//			//自定义着色器参数
-	//			gMat->SetGraphicsRoot(this->mCommandList.Get());
-
-	//			for (auto& pass : gMat->mRenderShader->mShaderPasses)
-	//			{
-	//				this->mCommandList->SetPipelineState(pass.GetPipline()->mDxPipelineState.Get());
-	//				{
-	//					//触发DrawCall命令
-	//					this->mCommandList->DrawIndexedInstanced(subMesh.IndexCount, 1, subMesh.IndexBaseStart, subMesh.VertexBaseStart, 0);
-	//				}
-	//			}
-	//		}
-	//	}
-	//}
+	
 	auto handle2 = CD3DX12_CPU_DESCRIPTOR_HANDLE(MRT_RtvDescriptorHandle.CpuHandle);
 	handle2.Offset(GBufferRTVOrder::Light * mGDevice->RTV_DescriptorSize);
 	auto dsv = this->mDsv->GetCPUView();
@@ -270,53 +222,32 @@ void DeferredRenderHost::RenderSkyBox()
 			}
 		}
 	}
-	//for (int i = 0; i < mesh->SubMeshes.size(); i++)
-	//{
-	//	auto subMesh = mesh->SubMeshes[i];
-	//	//启用默认材质
-
-
-
-	//	auto mat = this->mSkyBoxMat;
-
-	//	auto gMat = mat->GetGMat();
-
-
-	//	auto rootSignature = gMat->mRenderShader->mRootSignature;
-
-	//	this->mCommandList->SetGraphicsRootSignature(rootSignature->GetRootSig());
-	//	//固定参数
-	//	//裁剪矩阵、环境光
-	//	this->mCommandList->SetGraphicsRootConstantBufferView(0, this->mCommonPassConstantsRenderData.NavigateResource()->GetGPUVirtualAddress());
-	//	//光源
-	//	this->mCommandList->SetGraphicsRootConstantBufferView(1, this->mCommonLightRenderData.NavigateResource()->GetGPUVirtualAddress());
-
-
-	//	auto size = (sizeof(ObjectPassConstants) + 255) & ~255;
-	//	this->mCommandList->SetGraphicsRootConstantBufferView(2
-	//		, this->mCommonObjectPassContantsRenderData.NavigateResource()
-	//		->GetGPUVirtualAddress() + this->mSkyObjIndex * size);
-	//	//自定义着色器参数
-	//	gMat->SetGraphicsRoot(this->mCommandList.Get());
-
-	//	for (auto& pass : gMat->mRenderShader->mShaderPasses)
-	//	{
-	//		this->mCommandList->SetPipelineState(pass.GetPipline()->mDxPipelineState.Get());
-	//		{
-	//			//触发DrawCall命令
-	//			this->mCommandList->DrawIndexedInstanced(subMesh.IndexCount, 1, subMesh.IndexBaseStart, subMesh.VertexBaseStart, 0);
-	//		}
-	//	}
-	//}
-
-
-
 }
+
+void DeferredRenderHost::RenderSsao()
+{
+	this->mSSAOController->BeginSSAORender(this->mCommandList.Get());
+	auto normalHandle = CD3DX12_GPU_DESCRIPTOR_HANDLE(MRT_SrvDescriptorHandle.GpuHandle);
+	normalHandle.Offset(GBufferRTVOrder::NormalAndRoughness * mGDevice->RTV_DescriptorSize);
+	auto depthHandle= this->mDepthSrv->GetGPUView();
+	this->mSSAOController->OnRenderSSAO(this->mCommandList.Get(),normalHandle,depthHandle);
+	this->mSSAOController->EndSSAORender(this->mCommandList.Get());
+}
+
+
 void DeferredRenderHost::Resize(int width, int height)
 {
 	RenderHost::Resize(width, height);
 	this->CreateMRTResource();
 	this->MRTResourceBindDescriptor();
+	this->DepthStencilResouceBindDescriptor();
+	this->mSSAOController->Resize((UINT)width, (UINT)height);
+	this->mFxaaController->Resize((UINT)width, (UINT)height);
+
+}
+void DeferredRenderHost::DepthStencilResouceBindDescriptor()
+{
+	this->mDepthSrv=ShaderResourceView::CreateShaderView(mGDevice, this->mDepthStencilGraphicsResource.get(), this->mDepthSrvDescriptor, DXGI_FORMAT_R24_UNORM_X8_TYPELESS);
 }
 
 void DeferredRenderHost::CreateMRTResource()
@@ -347,6 +278,9 @@ void DeferredRenderHost::RenderWorldPosQuad()
 	this->mCommandList->SetPipelineState(this->screenQuadMaterialContext->mRenderShader->mShaderPasses[0].GetPipline()->mDxPipelineState.Get());
 	this->mCommandList->SetGraphicsRootSignature(this->screenQuadMaterialContext->mRenderShader->mRootSignature->GetRootSig());
 
+
+	
+
 	//debug显示g-buffer数据
 	CD3DX12_GPU_DESCRIPTOR_HANDLE MRTHandle = CD3DX12_GPU_DESCRIPTOR_HANDLE(MRT_SrvDescriptorHandle.GpuHandle);
 	auto MRTHandle2 = MRTHandle;
@@ -356,7 +290,7 @@ void DeferredRenderHost::RenderWorldPosQuad()
 
 	MRTHandle.Offset(1 * mGDevice->CBV_SRV_UAV_DescriptorSize);
 	this->mCommandList->SetGraphicsRootDescriptorTable(0, MRTHandle);
-	//DrawMesh(this->normalRoughnessQuadMesh.get());
+	DrawMesh(this->normalRoughnessQuadMesh.get());
 	
 	MRTHandle.Offset(1 * mGDevice->CBV_SRV_UAV_DescriptorSize);
 	this->mCommandList->SetGraphicsRootDescriptorTable(0, MRTHandle);
@@ -376,7 +310,8 @@ void DeferredRenderHost::RenderWorldPosQuad()
 	
 	this->mCommandList->SetGraphicsRootDescriptorTable(0, MRTHandle);
 	DrawMesh(ScreenQuadMesh.get());
-	
+	//this->mCommandList->SetGraphicsRootDescriptorTable(0, this->mDepthSrv->GetGPUView());
+	//DrawMesh(this->woroldPosQuadMesh.get());
 
 }
 

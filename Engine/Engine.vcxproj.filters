@@ -231,6 +231,12 @@
     <ClInclude Include="ShadowMap.h">
       <Filter>头文件\Render</Filter>
     </ClInclude>
+    <ClInclude Include="SSAOController.h">
+      <Filter>头文件\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="FxaaController.h">
+      <Filter>头文件\Render</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EnterEngine.cpp">
@@ -346,6 +352,12 @@
     </ClCompile>
     <ClCompile Include="MaterialResource.cpp">
       <Filter>源文件\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="SSAOController.cpp">
+      <Filter>源文件\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="FxaaController.cpp">
+      <Filter>源文件\Render</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

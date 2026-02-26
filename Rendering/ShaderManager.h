@@ -20,9 +20,9 @@ using namespace Microsoft::WRL;
 
 #define SHADOW_MAP_RENDER_SHADER_ID 25
 #define SKYBOX_RENDER_SHADER_ID 26
-
-
-#define RENDER_SHADER_ID_MAX 30
+#define SSAO_RENDER_SHADER_ID 27
+#define FXAA_CONSOLE_RENDER_SHADER_ID 28
+#define RENDER_SHADER_ID_MAX 40
 
 
 #define DEFERRED_SHADER_ID "DeferredShader"
@@ -33,6 +33,8 @@ using namespace Microsoft::WRL;
 #define DEFERRED_LIGHT_SHADER_ID "DeferredLightShader"
 #define PBR_DEFERRED_SHADER_ID "PBRDeferredShader"
 #define SHADOW_MAP_SHADER_ID "ShadowMapShader"
+#define SSAO_SHADER_ID "SSAO_Shader"
+#define FXAA_SHADER_ID "FxaaShader"
 class ShaderManager
 {
 public :
