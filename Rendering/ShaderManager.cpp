@@ -37,10 +37,10 @@ void ShaderManager::init()
 	mShaderDataMap["PS_SSAO"] = LoadShaderData("..\\..\\Shaders\\Ssao.hlsl", "PSMain", "ps_5_0");
 	mShaderDataMap["VS_SSAO"] = LoadShaderData("..\\..\\Shaders\\Ssao.hlsl", "VSMain", "vs_5_0");
 
-	mShaderDataMap["PS_FXAA"] = LoadShaderData("..\\..\\Shaders\\Fxaa.hlsl", "PSMain", "ps_5_0");
+	mShaderDataMap["PS_FXAA"] = LoadShaderData("..\\..\\Shaders\\FxaaPS.hlsl", "PSMain", "ps_5_0");
 
 
-	mShaderDataMap["VS_ScreenQuad_1"] = LoadShaderData("..\\..\\Shaders\\ScreenQuad_1_VS", "VSMain", "vs_5_0");
+	mShaderDataMap["VS_ScreenQuad_1"] = LoadShaderData("..\\..\\Shaders\\ScreenQuad_1_VS.hlsl", "VSMain", "vs_5_0");
 
 	LoadShaders();
 	LoadRenderShaders();

@@ -82,10 +82,12 @@ void DeferredRenderHost::CreateScreenQuadMesh()
 	auto diffuse = creator.CreateQuad(-0.5f, 0.0f, 0.5f, 1.0f, 0.0f);
 	this->diffuseQuadMesh = std::make_shared<Mesh>(diffuse, mGDevice);
 
-	auto dpecularAndEmissive = creator.CreateQuad(-1.0f, 0.0f, 0.5f, 1.0f, 0.0f);
+	//auto dpecularAndEmissive = creator.CreateQuad(-1.0f, 0.0f, 0.5f, 1.0f, 0.0f);
+	auto dpecularAndEmissive = creator.CreateQuad(0.0f, 1.0f, 1.0f, 2.0f, 0.0f);
 	this->dpecularAndEmissiveQuadMesh = std::make_shared<Mesh>(dpecularAndEmissive, mGDevice);
 
-	auto light = creator.CreateQuad(-1.0f, 1.0f, 2.0f, 1.0f, 0.0f);
+	//auto light = creator.CreateQuad(-1.0f, 1.0f, 2.0f, 1.0f, 0.0f);
+	auto light = creator.CreateQuad(-1.0f, 1.0f, 1.0f, 2.0f, 0.0f);
 	this->lightQuadMesh = std::make_shared<Mesh>(light, mGDevice);
 
 	auto screen = creator.CreateQuad(-1.0f, 1.0f, 2.0f, 2.0f, 0.0f);
@@ -131,7 +133,7 @@ ComPtr<ID3D12GraphicsCommandList> DeferredRenderHost::OnRender()
 		this->mCommandList->ResourceBarrier(1, &mrtResourceBar);
 	}
 
-	//PostProcess();
+	PostProcess();
 
 	
 	////ÉèÖÃÊÓ¿Ú
@@ -241,8 +243,8 @@ void DeferredRenderHost::Resize(int width, int height)
 	this->CreateMRTResource();
 	this->MRTResourceBindDescriptor();
 	this->DepthStencilResouceBindDescriptor();
-	this->mSSAOController->Resize((UINT)width, (UINT)height);
-	this->mFxaaController->Resize((UINT)width, (UINT)height);
+	this->mSSAOController->Resize(width, height);
+	this->mFxaaController->Resize(width, height);
 
 }
 void DeferredRenderHost::DepthStencilResouceBindDescriptor()
@@ -290,7 +292,7 @@ void DeferredRenderHost::RenderWorldPosQuad()
 
 	MRTHandle.Offset(1 * mGDevice->CBV_SRV_UAV_DescriptorSize);
 	this->mCommandList->SetGraphicsRootDescriptorTable(0, MRTHandle);
-	DrawMesh(this->normalRoughnessQuadMesh.get());
+	//DrawMesh(this->normalRoughnessQuadMesh.get());
 	
 	MRTHandle.Offset(1 * mGDevice->CBV_SRV_UAV_DescriptorSize);
 	this->mCommandList->SetGraphicsRootDescriptorTable(0, MRTHandle);
@@ -302,14 +304,21 @@ void DeferredRenderHost::RenderWorldPosQuad()
 	/*this->mCommandList->SetGraphicsRootDescriptorTable(0, MRTHandle);
 	DrawMesh(this->dpecularAndEmissiveQuadMesh.get());*/
 
-	auto shadowMapHandle = this->mShadowMapController->GetShadowMapSrvGPUHandle();
-	this->mCommandList->SetGraphicsRootDescriptorTable(0, shadowMapHandle);
-	//DrawMesh(this->dpecularAndEmissiveQuadMesh.get());
+	
 
 	MRTHandle.Offset(1 * mGDevice->CBV_SRV_UAV_DescriptorSize);
 	
 	this->mCommandList->SetGraphicsRootDescriptorTable(0, MRTHandle);
-	DrawMesh(ScreenQuadMesh.get());
+	DrawMesh(this->dpecularAndEmissiveQuadMesh.get());
+	//DrawMesh(ScreenQuadMesh.get());
+
+	auto shadowMapHandle = this->mShadowMapController->GetShadowMapSrvGPUHandle();
+	//this->mCommandList->SetGraphicsRootDescriptorTable(0, shadowMapHandle);
+	this->mCommandList->SetGraphicsRootDescriptorTable(0, this->mFxaaController->GetPostProcessedMap());
+	DrawMesh(lightQuadMesh.get());
+	//DrawMesh(ScreenQuadMesh.get());
+
+	//DrawMesh(ScreenQuadMesh.get());
 	//this->mCommandList->SetGraphicsRootDescriptorTable(0, this->mDepthSrv->GetGPUView());
 	//DrawMesh(this->woroldPosQuadMesh.get());
 

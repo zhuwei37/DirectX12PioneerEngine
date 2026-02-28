@@ -1,17 +1,24 @@
 #include"FxaaController.h"
 #include"MaterialContexts.h"
-
-FxaaController::FxaaController(GraphicsDevice* device, UINT width, UINT height):
+FxaaController::FxaaController(GraphicsDevice* device, int width, int height):
 	mGDevice(device),
 	mWidth(width),
-	mHeight(height)
+	mHeight(height),
+	mFxaaCB(device,1,false)
 {
 	Init();
 }
 void FxaaController::Init()
 {
 	this->mFaxxMaterialContext = MaterialContexts::GetMaterialContext(FXAA_CONSOLE_RENDER_SHADER_ID);
+	FxaaConstants cb;
+	cb.gFxaaConsoleEdgeMainThresholdMin = 0.05;
+	cb.gFxaaConsoleEdgeSharpness = 8.0;
+	cb.gFxaaConsoleEdgeThreshold = 0.125;
+	cb.gFxaaFrameInvSize.x = (1 / (float)mWidth);
+	cb.gFxaaFrameInvSize.y = (1 / (float)mHeight);
 
+	this->mFxaaCB.SetData(0, cb);
 
 	mViewPort =
 	{
@@ -23,7 +30,7 @@ void FxaaController::Init()
 	mRect =
 	{
 		0,0,
-		(long)mWidth,(long)mHeight
+		mWidth,mHeight
 	};
 	this->mRtvDescriptor = mGDevice->RtvDescriptorHeapAllocator->Allocator(1);
 	this->mSrvDescritpor = mGDevice->CBV_SRV_UAV_Shader_Visible_DescriptorHeapAllocator->Allocator(1);
@@ -33,10 +40,10 @@ void FxaaController::Init()
 void FxaaController::CreateResource()
 {
 	ResourceDescription desc;
-	desc.ClearColor[0] = 1.0f;
-	desc.ClearColor[1] = 1.0f;
-	desc.ClearColor[2] = 1.0f;
-	desc.ClearColor[3] = 1.0f;
+	desc.ClearColor[0] = 0.0f;
+	desc.ClearColor[1] = 0.0f;
+	desc.ClearColor[2] = 0.0f;
+	desc.ClearColor[3] = 0.0f;
 	desc.Format = mFxaaFormat;
 	desc.Width = this->mWidth ;
 	desc.Height = this->mHeight ;
@@ -76,13 +83,18 @@ void FxaaController::OnRender(ID3D12GraphicsCommandList* mCommandList, D3D12_GPU
 	mCommandList->SetGraphicsRootSignature(rs->mRootSignature->GetRootSig());
 	
 	//this->mFaxxMaterialContext->SetGraphicsRoot(mCommandList);
+
+	mCommandList->SetGraphicsRootConstantBufferView(0, this->mFxaaCB.NavigateResource()->GetGPUVirtualAddress());
+	mCommandList->SetGraphicsRootDescriptorTable(1, useSrvMap);
+
+
 	mCommandList->IASetVertexBuffers(0, 0, nullptr);
 	mCommandList->IASetIndexBuffer(nullptr);
 	mCommandList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	mCommandList->DrawInstanced(6, 1, 0, 0);
 
 }
-void FxaaController::Resize(UINT width, UINT height)
+void FxaaController::Resize(int width, int height)
 {
 	if (this->mWidth != width || this->mHeight != height)
 	{
@@ -96,9 +108,16 @@ void FxaaController::Resize(UINT width, UINT height)
 		mRect =
 		{
 			0,0,
-			(long)mWidth,(long)mHeight
+			mWidth,mHeight
 		};
+		FxaaConstants cb;
+		cb.gFxaaConsoleEdgeMainThresholdMin = 0.05;
+		cb.gFxaaConsoleEdgeSharpness = 8.0;
+		cb.gFxaaConsoleEdgeThreshold = 0.125;
+		cb.gFxaaFrameInvSize.x = (1 / (float)mWidth);
+		cb.gFxaaFrameInvSize.y = (1 / (float)mHeight);
 
+		this->mFxaaCB.SetData(0, cb);
 		CreateResource();
 		BuildDescriptor();
 	}

@@ -5,19 +5,21 @@
 #include"ShaderResourceView.h"
 #include"GTexture.h"
 #include"Descriptor.h"
+#include"UploadData.h"
+#include"DefaultConstants.h"
+#include"Mesh.h"
 class FxaaController
 {
-	
 public:
-	FxaaController(GraphicsDevice *device,UINT width,UINT height);
+	FxaaController(GraphicsDevice *device, int width, int height);
 	void PreRender(ID3D12GraphicsCommandList* mCommandList);
 	void OnRender(ID3D12GraphicsCommandList* mCommandList,D3D12_GPU_DESCRIPTOR_HANDLE useSrvMap);
 	void EndRender(ID3D12GraphicsCommandList* mCommandList);
-	void Resize(UINT height, UINT width);
+	void Resize(int height, int width);
 	D3D12_GPU_DESCRIPTOR_HANDLE GetPostProcessedMap();
 private:
-	UINT mHeight;
-	UINT mWidth;
+	int mHeight;
+	int mWidth;
 	void Init();
 	void CreateResource();
 	void BuildDescriptor();
@@ -25,6 +27,9 @@ private:
 	std::shared_ptr<RenderTargetView> mRtv;
 	std::shared_ptr<ShaderResourceView> mSrv;
 	std::shared_ptr<GTexture> mFxaaTexture;
+
+	UploadRenderData<FxaaConstants> mFxaaCB;
+
 	Descriptor mRtvDescriptor;
 	Descriptor mSrvDescritpor;
 	GraphicsDevice* mGDevice;

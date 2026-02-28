@@ -45,4 +45,24 @@ typedef struct SsaoConstants
     float OcclusionFadeStart = 0.2f;
     float OcclusionFadeEnd = 2.0f;
     float SurfaceEpsilon = 0.05f;
+}SsaoConstants;
+
+typedef struct FxaaConstants
+{
+    /// <summary>
+    /// Œ∆¿Ì≥ﬂ¥ÁƒÊ
+    /// </summary>
+    DirectX::XMFLOAT4 gFxaaFrameInvSize;
+    /// <summary>
+    /// ±ﬂ‘µ»Ò∂»
+    /// </summary>
+    float gFxaaConsoleEdgeSharpness;
+    /// <summary>
+    /// ±ﬂ‘µ„–÷µ
+    /// </summary>
+    float gFxaaConsoleEdgeThreshold;
+    /// <summary>
+    /// ◊Ó–°±ﬂ‘µ„–÷µ
+    /// </summary>
+    float gFxaaConsoleEdgeMainThresholdMin;
 };
