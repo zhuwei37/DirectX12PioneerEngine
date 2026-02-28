@@ -53,6 +53,10 @@ public:
 			return GetFxaaConsoleMaterialContext(dev);
 
 		}
+		case FXAA_THE_FIRST_RENDER_SHADER_ID:
+		{
+			return GetFxaaTheFirstMaterialContext(dev);
+		}
 		default:
 			break;
 		}
@@ -251,5 +255,10 @@ private:
 		auto renderShaderContext = std::make_shared<MaterialContext>(rs, nullptr, Descriptor{ 0 });
 		return renderShaderContext;
 	}
-
+	static std::shared_ptr<MaterialContext> GetFxaaTheFirstMaterialContext(GraphicsDevice* mGDevice)
+	{
+		auto rs = ShaderManager::Get()->GetRenderShader(FXAA_THE_FIRST_RENDER_SHADER_ID);
+		auto renderShaderContext = std::make_shared<MaterialContext>(rs, nullptr, Descriptor{ 0 });
+		return renderShaderContext;
+	}
 };

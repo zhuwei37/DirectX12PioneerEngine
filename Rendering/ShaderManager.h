@@ -22,6 +22,7 @@ using namespace Microsoft::WRL;
 #define SKYBOX_RENDER_SHADER_ID 26
 #define SSAO_RENDER_SHADER_ID 27
 #define FXAA_CONSOLE_RENDER_SHADER_ID 28
+#define FXAA_THE_FIRST_RENDER_SHADER_ID 29
 #define RENDER_SHADER_ID_MAX 40
 
 
@@ -35,6 +36,7 @@ using namespace Microsoft::WRL;
 #define SHADOW_MAP_SHADER_ID "ShadowMapShader"
 #define SSAO_SHADER_ID "SSAO_Shader"
 #define FXAA_SHADER_ID "FxaaShader"
+#define FXAA_THE_FIRST_SHADER_ID "FxaaTheFirstShader"
 class ShaderManager
 {
 public :

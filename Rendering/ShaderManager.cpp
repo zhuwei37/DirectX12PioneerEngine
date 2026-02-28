@@ -38,7 +38,7 @@ void ShaderManager::init()
 	mShaderDataMap["VS_SSAO"] = LoadShaderData("..\\..\\Shaders\\Ssao.hlsl", "VSMain", "vs_5_0");
 
 	mShaderDataMap["PS_FXAA"] = LoadShaderData("..\\..\\Shaders\\FxaaPS.hlsl", "PSMain", "ps_5_0");
-
+	mShaderDataMap["PS_FXAA_TheFirst"] = LoadShaderData("..\\..\\Shaders\\FxaaTheFirstPS.hlsl", "PSMain", "ps_5_0");
 
 	mShaderDataMap["VS_ScreenQuad_1"] = LoadShaderData("..\\..\\Shaders\\ScreenQuad_1_VS.hlsl", "VSMain", "vs_5_0");
 
@@ -265,6 +265,23 @@ void ShaderManager::LoadShaders()
 	mShadersMap[FXAA_SHADER_ID] = FxaaShaders;
 #pragma endregion
 
+#pragma region FXAA The First
+	{
+		
+		std::shared_ptr<Shaders> FxaaTheFirstShaders = std::make_shared<Shaders>();
+		FxaaTheFirstShaders->VS =
+		{
+			reinterpret_cast<BYTE*>(mShaderDataMap["VS_ScreenQuad_1"]->GetBufferPointer()),
+			mShaderDataMap["VS_ScreenQuad_1"]->GetBufferSize()
+		};
+		FxaaTheFirstShaders->PS =
+		{
+			reinterpret_cast<BYTE*> (mShaderDataMap["PS_FXAA_TheFirst"]->GetBufferPointer()),
+			mShaderDataMap["PS_FXAA_TheFirst"]->GetBufferSize()
+		};
+		mShadersMap[FXAA_THE_FIRST_SHADER_ID] = FxaaTheFirstShaders;
+	}
+#pragma endregion
 
 
 
@@ -569,6 +586,30 @@ void ShaderManager::LoadRenderShaders()
 	}
 #pragma endregion
 
+#pragma region FXAA The First
+	{
+		auto FxaaTheFirstShader = this->GetShaders(FXAA_SHADER_ID);
+		auto FxaaTheFirstRootSignature = std::make_shared<RootSignature>(GDevice, 2);
+		FxaaTheFirstRootSignature->AddConstantBufferView();
+		FxaaTheFirstRootSignature->AddSrvDescriptorTable(1);
+		FxaaTheFirstRootSignature->Build();
+
+		auto fxaaTheFirstPiplineState = std::make_shared<PipelineState>(GDevice);
+		fxaaTheFirstPiplineState->SetEnableDepth(false);
+		fxaaTheFirstPiplineState->SetDepthWriteMask(D3D12_DEPTH_WRITE_MASK_ZERO);
+
+		fxaaTheFirstPiplineState->SetDsvFormat(DXGI_FORMAT_UNKNOWN);
+		fxaaTheFirstPiplineState->Build(FxaaTheFirstRootSignature, FxaaTheFirstShader.get());
+
+		std::vector<ShaderPass> FxaaTheFirstPasses;
+		ShaderPass FxaaTheFirstPass(fxaaTheFirstPiplineState);
+		FxaaTheFirstPasses.push_back(FxaaTheFirstPass);
+		std::shared_ptr<RenderShader> FxaaRenderShader = std::make_shared<RenderShader>();
+		FxaaRenderShader->mRootSignature = FxaaTheFirstRootSignature;
+		FxaaRenderShader->mShaderPasses = FxaaTheFirstPasses;
+		mRenderShaderMap[FXAA_THE_FIRST_RENDER_SHADER_ID] = FxaaRenderShader;
+	}
+#pragma endregion
 
 
 

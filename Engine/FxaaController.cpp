@@ -10,7 +10,7 @@ FxaaController::FxaaController(GraphicsDevice* device, int width, int height):
 }
 void FxaaController::Init()
 {
-	this->mFaxxMaterialContext = MaterialContexts::GetMaterialContext(FXAA_CONSOLE_RENDER_SHADER_ID);
+	this->mFaxxMaterialContext = MaterialContexts::GetMaterialContext(FXAA_THE_FIRST_RENDER_SHADER_ID);
 	FxaaConstants cb;
 	cb.gFxaaConsoleEdgeMainThresholdMin = 0.05;
 	cb.gFxaaConsoleEdgeSharpness = 8.0;
