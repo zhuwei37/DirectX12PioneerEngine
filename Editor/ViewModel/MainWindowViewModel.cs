@@ -4,6 +4,7 @@ using Editor.RenderDx.Device;
 using Editor.Server;
 using Editor.Server.Scene;
 using Editor.Time;
+using Editor.View.Dialog;
 using Editor.ViewModel.Info;
 using Editor.ViewModel.Inspector;
 using Editor.ViewModel.Preview;
@@ -31,11 +32,14 @@ namespace Editor.ViewModel
        public ICommand SaveCommand { get;private set; }
         public ICommand OpenReadySceneCommand { get; private set; }
         public ICommand AddSceneNodeCommand { get; private set; }
+
+        public ICommand ShowColorCommand { get; private set; }
         public MainWindowViewModel()
         {
             OpenReadySceneCommand = new RelayCommand(OpenReadyScene);
             AddSceneNodeCommand= new RelayCommand(AddSceneNode);
             SaveCommand=new RelayCommand(Save);
+            ShowColorCommand=new RelayCommand(ShowColor);
             Init();
         }
        async void Init()
@@ -70,7 +74,11 @@ namespace Editor.ViewModel
             var s = (SceneNodePreviewViewModel)doc.vm.Tools[0];
             s.CreateSceneNodeCommand.Execute(null);
         }
-       
+        private void ShowColor()
+        {
+            ColorPreviewWindow colorPreviewWindow=new ColorPreviewWindow();
+            colorPreviewWindow.Show();
+        }
 
 
 

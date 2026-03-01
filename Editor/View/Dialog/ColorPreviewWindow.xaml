@@ -1,0 +1,94 @@
+﻿<Window x:Class="Editor.View.Dialog.ColorPreviewWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Editor.View.Dialog"
+        mc:Ignorable="d"
+        Title="ColorPreviewWindow" WindowStartupLocation="CenterScreen" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="功能区"/>
+        <TextBlock Text="Dark" Grid.Column="1"/>
+        <TextBlock Text="Blue" Grid.Column="2"/>
+        <TextBlock Text="Fresh Blue "  Grid.Column="3"/>
+
+        <TextBlock Text="主窗口背景、画布底色" Grid.Row="1" />
+        <Border Background="#1e1e1e" Grid.Row="1"  Grid.Column="1"/>
+        <Border Background="#F5F5F5" Grid.Row="1"  Grid.Column="2"/>
+        <Border Background="#F0F7FF"  Grid.Row="1"   Grid.Column="3"/>
+
+        <TextBlock Text="卡片、面板、工具底色" Grid.Row="2" />
+        <Border Background="#252526"          Grid.Row="2"  Grid.Column="1"/>
+        <Border Background="#FFFFFF"         Grid.Row="2"  Grid.Column="2"/>
+        <Border Background="#FFFFFF"         Grid.Row="2"   Grid.Column="3"/>
+
+        <TextBlock Text="鼠标悬停或选中时的背景" Grid.Row="3" />
+        <Border Background="#2A2D2E"           Grid.Row="3"  Grid.Column="1"/>
+        <Border Background="#E8E8E8"          Grid.Row="3"  Grid.Column="2"/>
+        <Border Background="#E6F0FA"           Grid.Row="3"   Grid.Column="3"/>
+
+        <TextBlock Text="控件边框、区域分割线" Grid.Row="4" />
+        <Border Background="#3E3E42"         Grid.Row="4"  Grid.Column="1"/>
+        <Border Background="#CCCEDB"         Grid.Row="4"  Grid.Column="2"/>
+        <Border Background="#D4E0E9"         Grid.Row="4"   Grid.Column="3"/>
+
+        <TextBlock Text="普通级别文字、图标" Grid.Row="5" />
+        <Border Background="#F1F1F1"       Grid.Row="5"  Grid.Column="1"/>
+        <Border Background="#1E1E1E"        Grid.Row="5"  Grid.Column="2"/>
+        <Border Background="#1E2A3A"        Grid.Row="5"   Grid.Column="3"/>
+
+        <TextBlock Text="辅助说明、占位符、禁用状态" Grid.Row="6" />
+        <Border Background="#9B9B9B"               Grid.Row="6"  Grid.Column="1"/>
+        <Border Background="#717171"               Grid.Row="6"  Grid.Column="2"/>
+        <Border Background="#7A8A9A"              Grid.Row="6"   Grid.Column="3"/>
+
+        <TextBlock Text="关键按钮、选中状态、焦点指示器" Grid.Row="7" />
+        <Border Background="	#007ACC"                   Grid.Row="7"  Grid.Column="1"/>
+        <Border Background="#007ACC"                  Grid.Row="7"  Grid.Column="2"/>
+        <Border Background="#4A9EFF"                    Grid.Row="7"   Grid.Column="3"/>
+
+
+        <TextBlock Text="主题按钮或颜色悬停效果" Grid.Row="8" />
+        <Border Background="#1C97EA"          Grid.Row="8"  Grid.Column="1"/>
+        <Border Background="#1C97EA"          Grid.Row="8"  Grid.Column="2"/>
+        <Border Background="#6CB2FF"             Grid.Row="8"   Grid.Column="3"/>
+
+        <TextBlock Text="操作成功、就绪状态" Grid.Row="9" />
+        <Border Background="#608B4E" Grid.Row="9"  Grid.Column="1"/>
+        <Border Background="#2A8E4B" Grid.Row="9"  Grid.Column="2"/>
+        <Border Background="#2A8E4B"  Grid.Row="9"   Grid.Column="3"/>
+
+        <TextBlock Text="潜在风险、需要注意的状态" Grid.Row="10" />
+        <Border Background="#C98B2E"            Grid.Row="10"  Grid.Column="1"/>
+        <Border Background="#C98B2E" Grid.Row="1"  Grid.Column="2"/>
+        <Border Background="#E68A2E"  Grid.Row="1"   Grid.Column="3"/>
+
+        <TextBlock Text="错误、危险" Grid.Row="11" />
+        <Border Background="#C94C4C"            Grid.Row="11"  Grid.Column="1"/>
+        <Border Background="#C94C4C" Grid.Row="11"  Grid.Column="2"/>
+        <Border Background="#E54E4E"  Grid.Row="11"   Grid.Column="3"/>
+
+
+
+
+    </Grid>
+</Window>

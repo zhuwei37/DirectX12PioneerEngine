@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:rs="clr-namespace:DirectX12PionnerEngine.UI.Resources"
+                    xmlns:i="clr-namespace:DirectX12PionnerEngine.UI.Helpers">
+
+    <ControlTemplate x:Key="{x:Static rs:TemplateKeys.ButtonTemplate}" TargetType="Button" >
+        <Border x:Name="Bor"
+                Background="{Binding Path=(i:ElementStateManager.Background),RelativeSource={RelativeSource TemplatedParent}}"
+                TextBlock.Foreground="{Binding}"
+            >
+            <ContentPresenter RecognizesAccessKey="True"
+                              HorizontalAlignment="{Binding RelativeSource={RelativeSource TemplatedParent},Path=HorizontalContentAlignment}"
+                              VerticalAlignment="{Binding RelativeSource={RelativeSource TemplatedParent},Path=VerticalContentAlignment}"/>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsPressed" Value="True">
+                
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+</ResourceDictionary>

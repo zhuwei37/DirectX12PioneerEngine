@@ -34,7 +34,9 @@
                 <MenuItem Header="预设场景" Command="{Binding OpenReadySceneCommand}"/>
                 <MenuItem Header="添加场景" Command="{Binding AddSceneNodeCommand}"/>
             </MenuItem>
-            
+            <MenuItem Header="工具">
+                <MenuItem Header="显示主题颜色" Command="{Binding ShowColorCommand}"/>
+            </MenuItem>
 
         </Menu>
         <view:DockMainView Grid.Row="1"/>
