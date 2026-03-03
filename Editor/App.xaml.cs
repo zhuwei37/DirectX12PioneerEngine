@@ -1,4 +1,5 @@
 ﻿using Editor.RenderDx;
+using Editor.Server;
 using System.Configuration;
 using System.Data;
 using System.Windows;
@@ -16,6 +17,12 @@ namespace Editor
             RenderDx.EngineDxImport.InitEngine();
            // RenderDx.EngineDxImport.SetGraphicsErrorCallBack(ErrorManager.GraphicsErrorCallBack);
             RenderDx.EngineDxImport.LoadScene();
+
+            ThemeManager.RegisterTheme("Dark", "DirectX12PionnerEngine.UI", "Themes/Dark.xaml");
+            ThemeManager.RegisterTheme("LightBlue", "DirectX12PionnerEngine.UI", "Themes/LightBlue.xaml");
+            ThemeManager.ApplyTheme("Dark");
+
+
             //Render.Instance.Init();
             base.OnStartup(e);
         }

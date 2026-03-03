@@ -5,28 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Editor"
         mc:Ignorable="d"
+      xmlns:i="clr-namespace:Editor.View"
         xmlns:m="clr-namespace:ViewPortLib;assembly=ViewPortLib"
         xmlns:view="clr-namespace:Editor.View"
       xmlns:control="clr-namespace:Editor.Control"
         Title="MainWindow" Height="700" Width="800"  Visibility="Visible" WindowState="Maximized">
     <Window.Resources>
-        <Style TargetType="Button">
-            <Setter Property="Width" Value="100"/>
-            <Setter Property="Height" Value="40"/>
-        </Style>
+   
     </Window.Resources>
     <Window.InputBindings>
         <KeyBinding Command="{Binding SaveCommand}" Gesture="Ctrl+S"/>
     </Window.InputBindings>
-    <Grid >
+    <Grid i:ThemeProps.Background="{ DynamicResource BackgroundBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
         <!--<StackPanel Orientation="Horizontal">
             <Button Content="添加组件" Visibility="Visible" Command="{Binding InitRenderCommand}" Background="Green" />
         </StackPanel>-->
-        <Menu Grid.Row="0" Background="White">
+        <Menu Grid.Row="0" Background="Transparent">
             <MenuItem Header="文件">
                 <MenuItem Header="导入"/>
             </MenuItem>
@@ -36,10 +35,18 @@
             </MenuItem>
             <MenuItem Header="工具">
                 <MenuItem Header="显示主题颜色" Command="{Binding ShowColorCommand}"/>
+                <Separator/>
+                <MenuItem Header="主题">
+                    <MenuItem Header="深色" Command="{Binding SwitchThemeCommand}" CommandParameter="Dark"/>
+                    <MenuItem Header="亮蓝色" Command="{Binding SwitchThemeCommand}" CommandParameter="LightBlue"/>
+                    <MenuItem Header="蓝色" Command="{Binding SwitchThemeCommand}" CommandParameter="Blue"/>
+                </MenuItem>
+                
             </MenuItem>
 
         </Menu>
         <view:DockMainView Grid.Row="1"/>
+     
     </Grid>
   
 </Window>

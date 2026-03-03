@@ -11,12 +11,12 @@
     <UserControl.Resources>
         <local:CC x:Key="c1" />
     </UserControl.Resources>
-    <Grid>
+    <Grid Background="Transparent">
       
 
         <dockx:DockingManager  x:Name="layout"  Grid.Row="1"
                               AnchorablesSource="{Binding Tools,Mode=TwoWay}" 
-                              DocumentsSource="{Binding MainDocuments}"  > 
+                              DocumentsSource="{Binding MainDocuments}" Background="Transparent" > 
             <dockx:DockingManager.LayoutItemContainerStyle>
                 <Style TargetType="{x:Type dockx:LayoutItem}">
                     <Setter Property="Title" Value="{Binding Model.Title}"/>

@@ -11,6 +11,8 @@
                 <ResourceDictionary Source="/Resource/TemplateResource/AvalonDataTemplate.xaml"/>
                 <ResourceDictionary Source="/Resource/ListBoxStyle.xaml"/>
                 <ResourceDictionary Source="/Resource/ButttonStyle.xaml"/>
+
+                <ResourceDictionary Source="pack://application:,,,/DirectX12PionnerEngine.UI;component/Themes/Generic.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -5,17 +5,33 @@
 
     <ControlTemplate x:Key="{x:Static rs:TemplateKeys.ButtonTemplate}" TargetType="Button" >
         <Border x:Name="Bor"
+             BorderThickness="{Binding Path=(i:ElementStateManager.BorderThickness),RelativeSource={RelativeSource TemplatedParent}}"
+                CornerRadius="{Binding Path=(i:ElementStateManager.BorderCornerRadius),RelativeSource={RelativeSource TemplatedParent}}"
                 Background="{Binding Path=(i:ElementStateManager.Background),RelativeSource={RelativeSource TemplatedParent}}"
-                TextBlock.Foreground="{Binding}"
             >
-            <ContentPresenter RecognizesAccessKey="True"
+            <Border>
+            <ContentPresenter Focusable="False" 
+                RecognizesAccessKey="True"
                               HorizontalAlignment="{Binding RelativeSource={RelativeSource TemplatedParent},Path=HorizontalContentAlignment}"
                               VerticalAlignment="{Binding RelativeSource={RelativeSource TemplatedParent},Path=VerticalContentAlignment}"/>
+            </Border>
         </Border>
         <ControlTemplate.Triggers>
-            <Trigger Property="IsPressed" Value="True">
-                
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" TargetName="Bor" 
+                        Value="{Binding Path=(i:ButtonHelper.HoverBackground),RelativeSource={RelativeSource TemplatedParent}}" />
             </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" TargetName="Bor" 
+                        Value="{Binding Path=(i:ButtonHelper.ClickBackground),RelativeSource={RelativeSource TemplatedParent}}"/>
+                <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.1" ScaleY="1.1"/>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+          
         </ControlTemplate.Triggers>
     </ControlTemplate>
 </ResourceDictionary>

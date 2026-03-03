@@ -44,18 +44,28 @@ namespace DirectX12PionnerEngine.UI.Helpers
         public static DependencyProperty BorderCornerRadiusProperty = DependencyProperty.RegisterAttached
             ("BorderCornerRadius", typeof(CornerRadius), typeof(ElementStateManager), new PropertyMetadata());
 
-        public static CornerRadius GetCornerRadius(DependencyObject obj)
+        public static CornerRadius GetBorderCornerRadius(DependencyObject obj)
         {
             return (CornerRadius)obj.GetValue(BorderCornerRadiusProperty);
         }
-        public static void SetCornerRadius(DependencyObject obj, CornerRadius value)
+        public static void SetBorderCornerRadius(DependencyObject obj, CornerRadius value)
         {
             obj.SetValue(BorderCornerRadiusProperty, value);
         }
 
         #endregion
 
-        #region Border
+        #region BorderThickness
+        public static DependencyProperty BorderThicknessProperty = DependencyProperty.RegisterAttached
+            ("BorderThickness", typeof(Thickness), typeof(ElementStateManager), new PropertyMetadata());
+        public static Thickness GetBorderThickness(DependencyObject obj) 
+        {
+            return (Thickness)obj.GetValue(BorderThicknessProperty);
+        }
+        public static void SetBorderThickness(DependencyObject obj, Thickness value)
+        {
+            obj.SetValue(BorderThicknessProperty, value);
+        }
 
         #endregion
 

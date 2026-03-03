@@ -34,12 +34,15 @@ namespace Editor.ViewModel
         public ICommand AddSceneNodeCommand { get; private set; }
 
         public ICommand ShowColorCommand { get; private set; }
+
+        public ICommand SwitchThemeCommand { get; private set; }
         public MainWindowViewModel()
         {
             OpenReadySceneCommand = new RelayCommand(OpenReadyScene);
             AddSceneNodeCommand= new RelayCommand(AddSceneNode);
             SaveCommand=new RelayCommand(Save);
             ShowColorCommand=new RelayCommand(ShowColor);
+            SwitchThemeCommand = new RelayCommand<string>(SwitchTheme);
             Init();
         }
        async void Init()
@@ -78,6 +81,14 @@ namespace Editor.ViewModel
         {
             ColorPreviewWindow colorPreviewWindow=new ColorPreviewWindow();
             colorPreviewWindow.Show();
+        }
+
+        private void SwitchTheme(string? themeName)
+        {
+            if (themeName != null)
+            {
+                ThemeManager.ApplyTheme(themeName);
+            }
         }
 
 
