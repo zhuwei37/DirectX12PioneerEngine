@@ -42,6 +42,8 @@ void ShaderManager::init()
 
 	mShaderDataMap["VS_ScreenQuad_1"] = LoadShaderData("..\\..\\Shaders\\ScreenQuad_1_VS.hlsl", "VSMain", "vs_5_0");
 
+	mShaderDataMap["PS_PbrParameter"] = LoadShaderData("..\\..\\Shaders\\PBR_ParameterPS.hlsl", "PSMain", "ps_5_0");
+
 	LoadShaders();
 	LoadRenderShaders();
 }
@@ -284,6 +286,29 @@ void ShaderManager::LoadShaders()
 #pragma endregion
 
 
+#pragma region PBR Parameter
+	{
+		std::shared_ptr<Shaders> pbrParameterShaders = std::make_shared<Shaders>();
+		pbrParameterShaders->VS =
+		{
+			reinterpret_cast<BYTE*>(mShaderDataMap["VS_Deferred"]->GetBufferPointer()),
+			mShaderDataMap["VS_Deferred"]->GetBufferSize()
+		};
+
+		pbrParameterShaders->PS =
+		{
+			reinterpret_cast<BYTE*>(mShaderDataMap["PS_PbrParameter"]->GetBufferPointer()),
+			mShaderDataMap["PS_PbrParameter"]->GetBufferSize()
+		};
+		pbrParameterShaders->InputLayout = {
+		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
+		{ "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
+		{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 24, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
+		{ "TANGENT", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 32, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
+		};
+		mShadersMap[PBR_PARAMETER_SHADER_ID] = pbrParameterShaders;
+	}
+#pragma endregion
 
 
 
@@ -611,6 +636,33 @@ void ShaderManager::LoadRenderShaders()
 	}
 #pragma endregion
 
+#pragma region PBR Parameter
+	{
+		auto pbrParameter = this->GetShaders(PBR_PARAMETER_SHADER_ID);
+		auto pbrParameterRootSignature = std::make_shared<RootSignature>(GDevice, 4);
+		pbrParameterRootSignature->AddConstantBufferView();
+		pbrParameterRootSignature->AddConstantBufferView();
+		pbrParameterRootSignature->AddConstantBufferView();
+
+		pbrParameterRootSignature->AddConstantBufferView();
+		pbrParameterRootSignature->Build();
+
+		auto pbrParameterPiplineState = std::make_shared<PipelineState>(GDevice);
+
+		pbrParameterPiplineState->SetRtvFormat(rtvFormats);
+		pbrParameterPiplineState->Build(pbrParameterRootSignature, pbrParameter.get());
+
+		std::vector<ShaderPass> pbrDeferredPasses;
+		ShaderPass pbrDeferredPass(pbrParameterPiplineState);
+		pbrDeferredPasses.push_back(pbrDeferredPass);
+
+		std::shared_ptr<RenderShader> pbrParameterRenderShader = std::make_shared<RenderShader>();
+		pbrParameterRenderShader->mRootSignature = pbrParameterRootSignature;
+		pbrParameterRenderShader->mShaderPasses = pbrDeferredPasses;
+
+		mRenderShaderMap[PBR_PARAMETER_RENDER_SHADER_ID] = pbrParameterRenderShader;
+	}
+#pragma endregion
 
 
 }

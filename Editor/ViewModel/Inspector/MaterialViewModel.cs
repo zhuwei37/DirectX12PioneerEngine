@@ -23,11 +23,11 @@ namespace Editor.ViewModel.Inspector
         {
             new ShaderViewModel(){ ShaderName="DefaultDiffuse",ShaderID=0},
             new ShaderViewModel(){ ShaderName="SolidColor",ShaderID=1},
-             new ShaderViewModel(){ ShaderName="NONE",ShaderID=2},
+             new ShaderViewModel(){ ShaderName="PBR_Parameter",ShaderID=2},
               new ShaderViewModel(){ ShaderName="NONE",ShaderID=3},
                new ShaderViewModel(){ ShaderName="NONE",ShaderID=4},
                 new ShaderViewModel(){ ShaderName="NONE",ShaderID=5},
-            new ShaderViewModel(){ ShaderName="PBR_Deferred",ShaderID=6},
+            new ShaderViewModel(){ ShaderName="PBR_Texture",ShaderID=6},
         };
         
         public MaterialViewModel(ResourceID matResourceID)
@@ -48,9 +48,15 @@ namespace Editor.ViewModel.Inspector
                     }
                 case 1:
                     {
-                        MaterialProperties = new SolidColorMaterialPropertiesViewModel(materialResourecID);
+                        MaterialProperties=new SolidColorMaterialPropertiesViewModel(materialResourecID);
                         break;
                     }
+                case 2:
+                    {
+                        MaterialProperties=new PBR_ParameterMateriaViewModel(materialResourecID);
+                        break;
+                    }
+
                 case 6:
                     {
                         MaterialProperties = new PBR_DeferredMaterialViewModel(materialResourecID);

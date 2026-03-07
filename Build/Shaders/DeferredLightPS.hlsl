@@ -1,5 +1,6 @@
 
 #include"Common.hlsl"
+#include"PbrParameter.hlsl"
 static const float MIN_ROUGHNESS = 0.0000001f;
 static const float F0_NON_METAL = 0.04f;
 //#include"LightingUtil.hlsl"
@@ -214,6 +215,14 @@ float4 PSMain(VertexOut pin):SV_Target
         litColor.a = diffuseAlbedo.a;
         //return ApecularAndEmissive;
         return litColor;
+    }
+    else if (matIndex=4)
+    {
+        float3 shadowFactor = float3(1.0f, 1.0f, 1.0f);
+        float4 ShadowPosH = mul(float4(worldPos, 1.0f), gShadowTransform);
+        shadowFactor[0] = CalcShadowFactor(ShadowPosH);
+        return PbrParameterLight(worldPosAndMatIndex, NormalAndRoughness, AlbedoAndMetallic, ApecularAndEmissive, shadowFactor);
+
     }
         return float4(0.0f, 0.0f, 0.0f, 0.0f);
       

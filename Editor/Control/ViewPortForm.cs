@@ -87,8 +87,10 @@ namespace Editor.Control
             base.OnApplyTemplate();
             //content = (ContentPresenter)this.GetTemplateChild("PART_Content");
             var viewPort = new ViewPortLib.ViewPort();
+           
             hWnd = viewPort.Handle;
             var formHost = new System.Windows.Forms.Integration.WindowsFormsHost();
+           
             formHost.Child = viewPort;
             if (hWnd == IntPtr.Zero)
             {

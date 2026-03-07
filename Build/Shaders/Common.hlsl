@@ -1,3 +1,5 @@
+
+
 #ifndef NUM_DIR_LIGHTS
 #define NUM_DIR_LIGHTS 1
 #endif
@@ -10,7 +12,8 @@
 #define NUM_SPOT_LIGHTS 0
 #endif
 
-
+#ifndef COMMON_HLSL
+#define COMMON_HLSL
 static const float PI = 3.14159265358979323846;
 #include"LightingUtil.hlsl"
 
@@ -71,3 +74,4 @@ float3 NormalSampleToWorldSpace(float3 normalMapSample, float3 unitNormalW, floa
 
     return bumpedNormalW;
 }
+#endif

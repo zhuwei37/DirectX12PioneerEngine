@@ -8,7 +8,6 @@
     <UseWPF>true</UseWPF>
 	  <UseWindowsForms>true</UseWindowsForms>
     <BaseOutputPath>../Build</BaseOutputPath>
-	 
   <SatelliteResourceLanguages>zh-Hans</SatelliteResourceLanguages>
   </PropertyGroup>
 
@@ -21,6 +20,7 @@
 	  <None Remove="Resource\Image\Icon\Material.png" />
 	  <None Remove="Resource\Image\Icon\Mesh.png" />
 	  <None Remove="Resource\Image\Icon\Model.png" />
+	  <None Remove="Resource\Image\Icon\Pioneer.png" />
 	  <None Remove="Resource\Image\Icon\UnknowFile.png" />
 	</ItemGroup>
 
@@ -38,6 +38,7 @@
 	  <Resource Include="Resource\Image\Icon\Material.png" />
 	  <Resource Include="Resource\Image\Icon\Mesh.png" />
 	  <Resource Include="Resource\Image\Icon\Model.png" />
+	  <Resource Include="Resource\Image\Icon\Pioneer.png" />
 	  <Resource Include="Resource\Image\Icon\UnknowFile.png" />
 	</ItemGroup>
 

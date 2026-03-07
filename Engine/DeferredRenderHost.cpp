@@ -82,12 +82,12 @@ void DeferredRenderHost::CreateScreenQuadMesh()
 	auto diffuse = creator.CreateQuad(-0.5f, 0.0f, 0.5f, 1.0f, 0.0f);
 	this->diffuseQuadMesh = std::make_shared<Mesh>(diffuse, mGDevice);
 
-	//auto dpecularAndEmissive = creator.CreateQuad(-1.0f, 0.0f, 0.5f, 1.0f, 0.0f);
-	auto dpecularAndEmissive = creator.CreateQuad(0.0f, 1.0f, 1.0f, 2.0f, 0.0f);
+	auto dpecularAndEmissive = creator.CreateQuad(-1.0f, 0.0f, 0.5f, 1.0f, 0.0f);
+	//auto dpecularAndEmissive = creator.CreateQuad(0.0f, 1.0f, 1.0f, 2.0f, 0.0f);
 	this->dpecularAndEmissiveQuadMesh = std::make_shared<Mesh>(dpecularAndEmissive, mGDevice);
 
-	//auto light = creator.CreateQuad(-1.0f, 1.0f, 2.0f, 1.0f, 0.0f);
-	auto light = creator.CreateQuad(-1.0f, 1.0f, 1.0f, 2.0f, 0.0f);
+	auto light = creator.CreateQuad(-1.0f, 1.0f, 2.0f, 1.0f, 0.0f);
+	//auto light = creator.CreateQuad(-1.0f, 1.0f, 1.0f, 2.0f, 0.0f);
 	this->lightQuadMesh = std::make_shared<Mesh>(light, mGDevice);
 
 	auto screen = creator.CreateQuad(-1.0f, 1.0f, 2.0f, 2.0f, 0.0f);
@@ -288,15 +288,15 @@ void DeferredRenderHost::RenderWorldPosQuad()
 	auto MRTHandle2 = MRTHandle;
 	//MRTHandle.Offset(1*mGDevice->CBV_SRV_UAV_DescriptorSize);
 	this->mCommandList->SetGraphicsRootDescriptorTable(0, MRTHandle);
-	//DrawMesh(this->woroldPosQuadMesh.get());
+	DrawMesh(this->woroldPosQuadMesh.get());
 
 	MRTHandle.Offset(1 * mGDevice->CBV_SRV_UAV_DescriptorSize);
 	this->mCommandList->SetGraphicsRootDescriptorTable(0, MRTHandle);
-	//DrawMesh(this->normalRoughnessQuadMesh.get());
+	DrawMesh(this->normalRoughnessQuadMesh.get());
 	
 	MRTHandle.Offset(1 * mGDevice->CBV_SRV_UAV_DescriptorSize);
 	this->mCommandList->SetGraphicsRootDescriptorTable(0, MRTHandle);
-	//DrawMesh(this->diffuseQuadMesh.get());
+	DrawMesh(this->diffuseQuadMesh.get());
 
 	
 
@@ -309,13 +309,13 @@ void DeferredRenderHost::RenderWorldPosQuad()
 	MRTHandle.Offset(1 * mGDevice->CBV_SRV_UAV_DescriptorSize);
 	
 	this->mCommandList->SetGraphicsRootDescriptorTable(0, MRTHandle);
-	DrawMesh(this->dpecularAndEmissiveQuadMesh.get());
+	DrawMesh(this->lightQuadMesh.get());
 	//DrawMesh(ScreenQuadMesh.get());
 
 	auto shadowMapHandle = this->mShadowMapController->GetShadowMapSrvGPUHandle();
 	//this->mCommandList->SetGraphicsRootDescriptorTable(0, shadowMapHandle);
 	this->mCommandList->SetGraphicsRootDescriptorTable(0, this->mFxaaController->GetPostProcessedMap());
-	DrawMesh(lightQuadMesh.get());
+	//DrawMesh(lightQuadMesh.get());
 	//DrawMesh(ScreenQuadMesh.get());
 
 	//DrawMesh(ScreenQuadMesh.get());

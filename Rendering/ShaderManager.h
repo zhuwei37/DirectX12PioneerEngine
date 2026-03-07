@@ -10,6 +10,7 @@ using namespace Microsoft::WRL;
 
 #define DEFUALT_RENDER_SHADER_ID 0
 #define SOLIDCOLOR_RENDER_SHADER_ID 1
+#define PBR_PARAMETER_RENDER_SHADER_ID 2
 
 #define DEFERRED_RENDER_SHADER_ID 3
 #define SCREEN_QUAD_RENDER_SHADER_ID 4
@@ -37,6 +38,7 @@ using namespace Microsoft::WRL;
 #define SSAO_SHADER_ID "SSAO_Shader"
 #define FXAA_SHADER_ID "FxaaShader"
 #define FXAA_THE_FIRST_SHADER_ID "FxaaTheFirstShader"
+#define PBR_PARAMETER_SHADER_ID "PbrParameterShader"
 class ShaderManager
 {
 public :

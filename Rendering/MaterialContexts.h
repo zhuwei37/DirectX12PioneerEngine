@@ -57,6 +57,11 @@ public:
 		{
 			return GetFxaaTheFirstMaterialContext(dev);
 		}
+		case PBR_PARAMETER_RENDER_SHADER_ID:
+		{
+			
+			return GetPbrParameterMaterialContext(dev);
+		}
 		default:
 			break;
 		}
@@ -259,6 +264,44 @@ private:
 	{
 		auto rs = ShaderManager::Get()->GetRenderShader(FXAA_THE_FIRST_RENDER_SHADER_ID);
 		auto renderShaderContext = std::make_shared<MaterialContext>(rs, nullptr, Descriptor{ 0 });
+		return renderShaderContext;
+	}
+	static std::shared_ptr<MaterialContext> GetPbrParameterMaterialContext(GraphicsDevice* device)
+	{
+
+		std::map<ShaderPropertyID, IShaderValue*> shaderValueMap;
+		UINT len = sizeof(DirectX::XMFLOAT3) + sizeof(float) + sizeof(float);
+		std::shared_ptr<UploadGraphicsData> data = std::make_shared<UploadGraphicsData>(device, len, 1);
+		ShaderPropertyID id;
+		UINT offset = 0;
+
+		id = ShaderProperty::PropertyToID("gAlbedo");
+		auto albedoPrpertyID = id;
+		ShaderValue<DirectX::XMFLOAT3>* Albedo = new  ShaderValue<DirectX::XMFLOAT3>(offset, ShaderValueType::Float3, id);
+		Albedo->SetUploadGraphicsData(data.get());
+		offset += sizeof(DirectX::XMFLOAT3);
+		shaderValueMap[id] = Albedo;
+
+		id = ShaderProperty::PropertyToID("gRoughness");
+		ShaderValue<float>* Roughness = new ShaderValue<float>(offset, ShaderValueType::Float, id);
+		Roughness->SetUploadGraphicsData(data.get());
+		offset += sizeof(float);
+		shaderValueMap[id] = Roughness;
+
+
+		id = ShaderProperty::PropertyToID("gMetalness");
+		ShaderValue<float>* Metalness = new ShaderValue<float>(offset, ShaderValueType::Float, id);
+		Metalness->SetUploadGraphicsData(data.get());
+		offset += sizeof(float);
+		shaderValueMap[id] = Metalness;
+
+		std::shared_ptr<ShaderProperties> ShaderPropertiess = std::make_shared<ShaderProperties>(data, shaderValueMap);
+
+		auto rs = ShaderManager::Get()->GetRenderShader(PBR_PARAMETER_RENDER_SHADER_ID);
+		auto renderShaderContext = std::make_shared<MaterialContext>(rs, ShaderPropertiess, Descriptor{ 0 });
+
+
+		renderShaderContext->SetFloat3(albedoPrpertyID, { 0.2,0.5,0.8 });
 		return renderShaderContext;
 	}
 };

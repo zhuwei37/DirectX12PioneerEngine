@@ -8,8 +8,9 @@
       xmlns:i="clr-namespace:Editor.View"
         xmlns:m="clr-namespace:ViewPortLib;assembly=ViewPortLib"
         xmlns:view="clr-namespace:Editor.View"
+        Icon="/Resource/Image/Icon/Pioneer.png"
       xmlns:control="clr-namespace:Editor.Control"
-        Title="MainWindow" Height="700" Width="800"  Visibility="Visible" WindowState="Maximized">
+        Title="DirectX12PinnerEngine" Height="700" Width="800"  Visibility="Visible" WindowState="Maximized">
     <Window.Resources>
    
     </Window.Resources>

@@ -20,7 +20,7 @@ namespace Editor
 
             ThemeManager.RegisterTheme("Dark", "DirectX12PionnerEngine.UI", "Themes/Dark.xaml");
             ThemeManager.RegisterTheme("LightBlue", "DirectX12PionnerEngine.UI", "Themes/LightBlue.xaml");
-            ThemeManager.ApplyTheme("Dark");
+            ThemeManager.ApplyTheme("LightBlue");
 
 
             //Render.Instance.Init();
