@@ -1,7 +1,7 @@
-!ThirdParty/
+
 !Build/Shaders/
 !Build/Textures/
-!static/
+
 # 编译生成文件
 *.o
 *.obj
@@ -21,7 +21,7 @@ Release/
 output/
 dist/
 bin/
-
+ThirdParty/
 # 临时文件
 *.tmp
 *.swp
