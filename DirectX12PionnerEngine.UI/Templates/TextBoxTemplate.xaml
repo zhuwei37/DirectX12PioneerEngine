@@ -1,0 +1,45 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:rs="clr-namespace:DirectX12PioneerEngine.UI.Resources"
+                    xmlns:i="clr-namespace:DirectX12PioneerEngine.UI.Helpers"
+                   
+                    xmlns:selector="clr-namespace:DirectX12PioneerEngine.UI.TemplateSelectors">
+    <ControlTemplate x:Key="{x:Static rs:TemplateKeys.TextBoxTemplate}" TargetType="TextBox">
+        <ControlTemplate.Resources>
+            <selector:WatermarkTemplateSelector x:Key="watermarkTemplateSelector"/>
+        </ControlTemplate.Resources>
+        <Border
+            BorderBrush="{Binding RelativeSource={RelativeSource TemplatedParent},Path=(i:ElementStateManager.BorderBrush),Mode=OneWay}"
+            BorderThickness="{Binding RelativeSource={RelativeSource TemplatedParent},Path=(i:ElementStateManager.BorderThickness),Mode=OneWay}"
+            Background="{Binding RelativeSource={RelativeSource TemplatedParent},Path=(i:ElementStateManager.Background),Mode=OneWay}"
+            CornerRadius="{Binding RelativeSource={RelativeSource TemplatedParent},Path=(i:ElementStateManager.BorderCornerRadius),Mode=OneWay}">
+            <Grid>
+                <Border Margin="{TemplateBinding Padding}">
+                    <ContentControl 
+                        IsHitTestVisible="False"
+                        Focusable="False"
+                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                         ContentTemplateSelector="{StaticResource watermarkTemplateSelector}"     
+                        Visibility="{Binding Text,
+                        Converter={x:Static rs:Converters.StringNonullAndNotEmptyToCollapseConverter}
+                        ,RelativeSource={RelativeSource TemplatedParent},Mode=OneWay}"
+                        Content="{Binding RelativeSource={RelativeSource TemplatedParent},Path=(i:TextBoxHelper.Watermark),Mode=OneWay}"
+                        FontSize="{Binding RelativeSource={RelativeSource TemplatedParent},Path=(i:WatermarkHelper.FontSize),Mode=OneWay}"
+                        FontFamily="{Binding RelativeSource={RelativeSource TemplatedParent},Path=(i:WatermarkHelper.FontFamily),Mode=OneWay}"
+                        Foreground="{Binding RelativeSource={RelativeSource TemplatedParent},Path=(i:WatermarkHelper.Foreground),Mode=OneWay}"
+                          
+                                    />
+                </Border>
+                <ScrollViewer x:Name="PART_ContentHost" 
+                              HorizontalContentAlignment="{TemplateBinding HorizontalAlignment}"
+                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                              VerticalScrollBarVisibility="{TemplateBinding VerticalScrollBarVisibility}"
+                              HorizontalScrollBarVisibility="{TemplateBinding HorizontalScrollBarVisibility}"
+                              >
+                    
+                </ScrollViewer>
+            </Grid>
+        </Border>
+    </ControlTemplate>
+</ResourceDictionary>

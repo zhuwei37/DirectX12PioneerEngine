@@ -20,7 +20,7 @@ float4 PbrParameterLight(float4 rt0,float4 rt1,float4 rt2,float4 rt3,float3 shad
     
     float3 color = ambient.rgb+Lo;
     color /= (color + 1.0);
-    color = pow(color, 1.0 / 2.0);
+    color = pow(color, 1.0 / 2.2);
    
   //  return float4(Lo, 1);
     //return float4(0.1, 0.5, 0.2, 1);

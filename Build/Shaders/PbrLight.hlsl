@@ -5,9 +5,9 @@
 #define PBR_LIGHT_HLSL
 float3 fresnelSchlick(float cosTheta,float3 F0)
 {
-    float3 F = F0 + (1 - F0) * exp2((-5.55473 * cosTheta - 6.98316) * cosTheta);
-    return F;
-    //return F0 + (1.0 - F0) * pow(clamp(1.0 - cosTheta, 0.0, 1.0), 5.0);
+    //float3 F = F0 + (1 - F0) * exp2((-5.55473 * cosTheta - 6.98316) * cosTheta);
+    //return F;
+    return F0 + (1.0 - F0) * pow(clamp(1.0 - cosTheta, 0.0, 1.0), 5.0);
 }
 
 
@@ -65,7 +65,7 @@ float3 BRDF(float3 n, float3 l, float3 v, float roughness, float metalness, floa
     float3 nominator = NDF * G * F;
     float denominator = NdotV * NdotL;
     //æµ√Ê∑¥…‰
-    float3 specularColor = nominator * 0.25 / denominator*PI;
+    float3 specularColor = nominator * 0.25 / denominator;
     
     float3 diffColor = (kd * albedo )/PI ;
     //return specularColor;

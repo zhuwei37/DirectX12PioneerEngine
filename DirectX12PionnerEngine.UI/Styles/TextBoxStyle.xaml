@@ -1,0 +1,30 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:rs="clr-namespace:DirectX12PioneerEngine.UI.Resources"
+                        xmlns:i="clr-namespace:DirectX12PioneerEngine.UI.Helpers"
+                    >
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/DirectX12PioneerEngine.UI;component/Templates/TextBoxTemplate.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    <Style TargetType="TextBox">
+        <Setter Property="i:ElementStateManager.Background" Value="{DynamicResource TextBox.BackgroundBrush}"/>
+        <Setter Property="i:ElementStateManager.BorderBrush" Value="{DynamicResource TextBox.BorderBrush}"/>
+        <Setter Property="i:ElementStateManager.BorderThickness" Value="0.5"/>
+        <Setter Property="i:ElementStateManager.BorderCornerRadius" Value="3"/>
+        <Setter Property="i:WatermarkHelper.Foreground" Value="{DynamicResource TextBoxWatermark.Foreground}"/>
+     
+        <Setter Property="Foreground" Value="{DynamicResource TextBox.ForegroundBrush}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template" Value="{StaticResource {x:Static rs:TemplateKeys.TextBoxTemplate}}"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="i:ElementStateManager.Background" Value="{DynamicResource TextBox.Background.MouserOverBrush}"/>
+                <Setter Property="i:ElementStateManager.BorderBrush" Value="{DynamicResource TextBox.Border.MouseOverBrush}"/>
+            </Trigger>
+            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                <Setter Property="i:ElementStateManager.BorderBrush" Value="{DynamicResource TextBox.Border.FocusedBrush}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

@@ -10,11 +10,7 @@
         <Style TargetType="Label">
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
-        <Style TargetType="TextBox">
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-        </Style>
+       
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>

@@ -71,7 +71,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DirectX12PionnerEngine.UI\DirectX12PionnerEngine.UI.csproj" />
+    <ProjectReference Include="..\DirectX12PionnerEngine.UI\DirectX12PioneerEngine.UI.csproj" />
     <ProjectReference Include="..\ViewPortLib\ViewPortLib.csproj" />
   </ItemGroup>
 

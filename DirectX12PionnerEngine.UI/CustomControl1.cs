@@ -9,7 +9,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DirectX12PionnerEngine.UI
+namespace DirectX12PioneerEngine.UI
 {
     /// <summary>
     /// Follow steps 1a or 1b and then 2 to use this custom control in a XAML file.
@@ -18,14 +18,14 @@ namespace DirectX12PionnerEngine.UI
     /// Add this XmlNamespace attribute to the root element of the markup file where it is 
     /// to be used:
     ///
-    ///     xmlns:MyNamespace="clr-namespace:DirectX12PionnerEngine.UI"
+    ///     xmlns:MyNamespace="clr-namespace:DirectX12PioneerEngine.UI"
     ///
     ///
     /// Step 1b) Using this custom control in a XAML file that exists in a different project.
     /// Add this XmlNamespace attribute to the root element of the markup file where it is 
     /// to be used:
     ///
-    ///     xmlns:MyNamespace="clr-namespace:DirectX12PionnerEngine.UI;assembly=DirectX12PionnerEngine.UI"
+    ///     xmlns:MyNamespace="clr-namespace:DirectX12PioneerEngine.UI;assembly=DirectX12PioneerEngine.UI"
     ///
     /// You will also need to add a project reference from the project where the XAML file lives
     /// to this project and Rebuild to avoid compilation errors:
@@ -44,6 +44,8 @@ namespace DirectX12PionnerEngine.UI
     {
         static CustomControl1()
         {
+            //Button button=new Button();
+            //button.Margin
             DefaultStyleKeyProperty.OverrideMetadata(typeof(CustomControl1), new FrameworkPropertyMetadata(typeof(CustomControl1)));
         }
     }

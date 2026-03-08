@@ -18,8 +18,8 @@ namespace Editor
            // RenderDx.EngineDxImport.SetGraphicsErrorCallBack(ErrorManager.GraphicsErrorCallBack);
             RenderDx.EngineDxImport.LoadScene();
 
-            ThemeManager.RegisterTheme("Dark", "DirectX12PionnerEngine.UI", "Themes/Dark.xaml");
-            ThemeManager.RegisterTheme("LightBlue", "DirectX12PionnerEngine.UI", "Themes/LightBlue.xaml");
+            ThemeManager.RegisterTheme("Dark", "DirectX12PioneerEngine.UI", "Themes/Dark.xaml");
+            ThemeManager.RegisterTheme("LightBlue", "DirectX12PioneerEngine.UI", "Themes/LightBlue.xaml");
             ThemeManager.ApplyTheme("LightBlue");
 
 

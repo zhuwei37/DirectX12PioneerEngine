@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 
-namespace DirectX12PionnerEngine.UI.Helpers
+namespace DirectX12PioneerEngine.UI.Helpers
 {
     public static class ElementStateManager
     {
@@ -70,7 +70,17 @@ namespace DirectX12PionnerEngine.UI.Helpers
         #endregion
 
 
+        public static DependencyProperty BorderBrushProperty = DependencyProperty.RegisterAttached
+            ("BorderBrush", typeof(Brush), typeof(ElementStateManager), new PropertyMetadata());
+        public static Brush GetBorderBrush(DependencyObject obj)
+        {
+            return (Brush)obj.GetValue(BorderBrushProperty);
+        }
 
+        public static void SetBorderBrush(DependencyObject obj, Brush value)
+        {
+            obj.SetValue(BorderBrushProperty, value);
+        }
 
         #endregion
     }

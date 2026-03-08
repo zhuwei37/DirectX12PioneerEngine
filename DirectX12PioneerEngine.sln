@@ -36,7 +36,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestProject", "TestProject\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tester", "Tester\Tester.vcxproj", "{E0624930-70EC-43B1-A6B4-98CDFB4CD085}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectX12PionnerEngine.UI", "DirectX12PionnerEngine.UI\DirectX12PionnerEngine.UI.csproj", "{BB2AE1D6-35D6-4CE9-9A00-240CF8D70885}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectX12PioneerEngine.UI", "DirectX12PionnerEngine.UI\DirectX12PioneerEngine.UI.csproj", "{BB2AE1D6-35D6-4CE9-9A00-240CF8D70885}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

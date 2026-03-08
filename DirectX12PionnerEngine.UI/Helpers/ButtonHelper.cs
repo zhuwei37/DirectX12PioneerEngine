@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 
-namespace DirectX12PionnerEngine.UI.Helpers
+namespace DirectX12PioneerEngine.UI.Helpers
 {
     public static class ButtonHelper
     {

@@ -5,4 +5,14 @@
     <SolidColorBrush x:Key="PrimaryBrush" Color="#4A9EFF"/>
     <SolidColorBrush x:Key="PrimaryHoverBrush" Color="#6CB2FF"/>
     <SolidColorBrush x:Key="PrimaryPressedBrush" Color="#3A8AE0"/>
+
+    <SolidColorBrush x:Key="TextBox.BackgroundBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="TextBox.BorderBrush" Color="#C9D9E8"/>
+    <SolidColorBrush x:Key="TextBox.ForegroundBrush" Color="#1E2A3A"/>
+    <SolidColorBrush x:Key="TextBox.Border.FocusedBrush" Color="#4A9EFF"/>
+    <SolidColorBrush x:Key="TextBox.Background.MouserOverBrush" Color= "#E1F0FE"/>
+    <SolidColorBrush x:Key="TextBox.Border.MouseOverBrush" Color="#6CB2FF"/>
+
+    <SolidColorBrush x:Key="TextBoxWatermark.Foreground" Color="#6F7E8F"/>
+
 </ResourceDictionary>
