@@ -16,4 +16,10 @@
     <SolidColorBrush x:Key="TextBox.Border.MouseOverBrush" Color="#1C97EA"/>
 
     <SolidColorBrush x:Key="TextBoxWatermark.Foreground" Color="#9B9B9B"/>
+
+
+
+    <SolidColorBrush x:Key="CheckBox.BackgroundBrush"/>
+    <SolidColorBrush x:Key="ChecjBix.BorderBrush"/>
+    
 </ResourceDictionary>

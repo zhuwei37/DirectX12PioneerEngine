@@ -11,5 +11,6 @@ namespace DirectX12PioneerEngine.UI.Resources
         public static string ButtonTemplate=nameof(ButtonTemplate);
 
         public static string TextBoxTemplate=nameof(TextBoxTemplate);
+        public static string CheckBoxTemplate=nameof(CheckBoxTemplate);
     }
 }

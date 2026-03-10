@@ -9,5 +9,7 @@ namespace DirectX12PioneerEngine.UI.Resources
     public static class Converters
     {
         public static StringNonullAndNotEmptyToCollapseConverter StringNonullAndNotEmptyToCollapseConverter = new StringNonullAndNotEmptyToCollapseConverter();
+
+        public static CheckBoxPathConverter CheckBoxPathConverter=new CheckBoxPathConverter();
     }
 }

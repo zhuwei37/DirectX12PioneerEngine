@@ -7,6 +7,36 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
+        <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="MinWidth" Value="30"/>
+        </Style>
+        <Style x:Key="StackPanelListBoxStyle1" TargetType="ListBox">
+          
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBox">
+                        <Grid Grid.IsSharedSizeScope="True">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition  SharedSizeGroup="PropertyName"/>
+                                <ColumnDefinition Width="*"   MinWidth="30" SharedSizeGroup="Place"/>
+                                <ColumnDefinition SharedSizeGroup="PropertyValueName_1"/>
+                                <ColumnDefinition SharedSizeGroup="PropertyValue_1"/>
+                                <ColumnDefinition SharedSizeGroup="PropertyValueName_2"/>
+                                <ColumnDefinition SharedSizeGroup="PropertyValue_2"/>
+                                <ColumnDefinition SharedSizeGroup="PropertyValueName_3"/>
+                                <ColumnDefinition SharedSizeGroup="PropertyValue_3"/>
+                                <ColumnDefinition SharedSizeGroup="PropertyValueName_4"/>
+                                <ColumnDefinition SharedSizeGroup="PropertyValue_4"/>
+                            </Grid.ColumnDefinitions>
+                          <ItemsPresenter/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
         <Style x:Key="TB_MaterialHeader" TargetType="ToggleButton">
             <Setter Property="Template">
                 <Setter.Value>
@@ -38,49 +68,73 @@
             </Setter>
         </Style>
         <DataTemplate x:Key="MaterialFloatPorpertyTemplate">
-            <Grid>
+            <Grid Grid.IsSharedSizeScope="True">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Label Content="{Binding Title}" Grid.Column="0"/>
-                <TextBox Text="{Binding PropertyValue,Converter={StaticResource StringToFloat},UpdateSourceTrigger=LostFocus}" Grid.Column="1" MinWidth="20"/>
+                <ColumnDefinition Width="auto" SharedSizeGroup="PropertyName"/>
+                <ColumnDefinition Width="*" SharedSizeGroup="Place"/>
+                <ColumnDefinition Width="auto" SharedSizeGroup="PropertyValueName_1"/>
+                <ColumnDefinition SharedSizeGroup="PropertyValue_1"/>
+                <ColumnDefinition SharedSizeGroup="PropertyValueName_2"/>
+                <ColumnDefinition SharedSizeGroup="PropertyValue_2"/>
+                <ColumnDefinition SharedSizeGroup="PropertyValueName_3"/>
+                <ColumnDefinition SharedSizeGroup="PropertyValue_3"/>
+                <ColumnDefinition SharedSizeGroup="PropertyValueName_4"/>
+                <ColumnDefinition SharedSizeGroup="PropertyValue_4"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="{Binding Title}" Grid.Column="0"/>
+            <TextBox Text="{Binding PropertyValue,Converter={StaticResource StringToFloat},UpdateSourceTrigger=LostFocus}"   Grid.Column="9" MinWidth="20"/>
             </Grid>
         </DataTemplate>
         <DataTemplate x:Key="MaterialFloat3PorpertyTemplate">
-            <Grid>
+            <Grid Grid.IsSharedSizeScope="True">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto" SharedSizeGroup="PropertyName"/>
+                    <ColumnDefinition Width="*" SharedSizeGroup="Place"/>
+                    <ColumnDefinition SharedSizeGroup="PropertyValueName_1"/>
+                    <ColumnDefinition SharedSizeGroup="PropertyValue_1"/>
+                    <ColumnDefinition SharedSizeGroup="PropertyValueName_2"/>
+                    <ColumnDefinition SharedSizeGroup="PropertyValue_2"/>
+                    <ColumnDefinition SharedSizeGroup="PropertyValueName_3"/>
+                    <ColumnDefinition SharedSizeGroup="PropertyValue_3"/>
+                    <ColumnDefinition SharedSizeGroup="PropertyValueName_4"/>
+                    <ColumnDefinition SharedSizeGroup="PropertyValue_4"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="{Binding Title}" Grid.Column="0"/>
-                <StackPanel Orientation="Horizontal"  Grid.Column="1" >
-                    <Label Content="X:"/>
-                    <TextBox Text="{Binding PropertyValue.X}" MinWidth="20"/>
-                    <Label Content="Y:"/>
-                    <TextBox Text="{Binding PropertyValue.Y}"  Grid.Column="1" MinWidth="20"/>
-                    <Label Content="Z:"/>
-                    <TextBox Text="{Binding PropertyValue.Z}"  Grid.Column="1" MinWidth="20"/>
-                </StackPanel>
+
+                <Label Content="X:"  Grid.Column="5"/>
+                <TextBox Text="{Binding PropertyValue.X}" Grid.Column="6" MinWidth="20"/>
+                <Label Content="Y:"  Grid.Column="7"/>
+                <TextBox Text="{Binding PropertyValue.Y}"  Grid.Column="1" MinWidth="20"/>
+                <Label Content="Z:"  Grid.Column="8"/>
+                <TextBox Text="{Binding PropertyValue.Z}"  Grid.Column="9" MinWidth="20"/>
+               
             </Grid>
         </DataTemplate>
         <DataTemplate x:Key="MaterialFloat4PorpertyTemplate">
-            <Grid>
+            <Grid Grid.IsSharedSizeScope="True">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto" SharedSizeGroup="PropertyName"/>
+                    <ColumnDefinition Width="*" SharedSizeGroup="Place"/>
+                    <ColumnDefinition SharedSizeGroup="PropertyValueName_1"/>
+                    <ColumnDefinition SharedSizeGroup="PropertyValue_1"/>
+                    <ColumnDefinition SharedSizeGroup="PropertyValueName_2"/>
+                    <ColumnDefinition SharedSizeGroup="PropertyValue_2"/>
+                    <ColumnDefinition SharedSizeGroup="PropertyValueName_3"/>
+                    <ColumnDefinition SharedSizeGroup="PropertyValue_3"/>
+                    <ColumnDefinition SharedSizeGroup="PropertyValueName_4"/>
+                    <ColumnDefinition SharedSizeGroup="PropertyValue_4"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="{Binding Title}" Grid.Column="0"/>
-                <StackPanel Orientation="Horizontal"  Grid.Column="1" >
-                    <Label Content="X:"/>
-                    <TextBox Text="{Binding PropertyValue.X}"  Grid.Column="1" MinWidth="20"/>
-                    <Label Content="Y:"/>
-                    <TextBox Text="{Binding PropertyValue.Y}"  Grid.Column="1" MinWidth="20"/>
-                    <Label Content="Z:"/>
-                    <TextBox Text="{Binding PropertyValue.Z}"  Grid.Column="1" MinWidth="20"/>
-                    <Label Content="W:"/>
-                    <TextBox Text="{Binding PropertyValue.W}"  Grid.Column="1" MinWidth="20"/>
-                </StackPanel>
+
+                   <Label Content="X" Grid.Column="2"/>
+                   <TextBox Text="{Binding PropertyValue.X}"  Grid.Column="3" />
+                    <Label Content="Y:" Grid.Column="4"/>
+                    <TextBox Text="{Binding PropertyValue.Y}"  Grid.Column="5" />
+                    <Label Content="Z:" Grid.Column="6"/>
+                    <TextBox Text="{Binding PropertyValue.Z}"  Grid.Column="7" />
+                    <Label Content="W:" Grid.Column="8"/>
+                    <TextBox Text="{Binding PropertyValue.W}"  Grid.Column="9" />
+               
             </Grid>
         </DataTemplate>
         <DataTemplate x:Key="MaterialTexturePropertyTemplpate">
@@ -116,7 +170,7 @@
                                 <Border BorderBrush="Black" BorderThickness="1" />
                                 <ToggleButton Background="Transparent" IsChecked="True" Grid.Row="1" Style="{StaticResource TB_MaterialHeader}" HorizontalAlignment="Stretch" x:Name="PART_TB"/>
                                 <Grid Grid.Row="2" x:Name="PART_GridProeprties">
-                                    <ListBox Style="{StaticResource StackPanelListBoxStyle}" ItemsSource="{Binding MaterialProperties}" ItemTemplateSelector="{StaticResource MaterialPropertyTemplate}">
+                                    <ListBox Style="{StaticResource StackPanelListBoxStyle1}" ItemsSource="{Binding MaterialProperties}" ItemTemplateSelector="{StaticResource MaterialPropertyTemplate}">
 
                                     </ListBox>
                                 </Grid>

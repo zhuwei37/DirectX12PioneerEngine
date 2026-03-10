@@ -6,9 +6,20 @@
                 <ControlTemplate TargetType="Button">
                     <Border CornerRadius="3"  x:Name="PART_Bor" Background="#e6e6e6">
                         <Grid Background="Transparent">
-                            <Ellipse Stroke="Black" StrokeThickness="2" HorizontalAlignment="Center"  VerticalAlignment="Center"   Height="15" Width="15">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Ellipse Stroke="Black" Grid.RowSpan="3" Grid.ColumnSpan="3" StrokeThickness="2" HorizontalAlignment="Center"  VerticalAlignment="Center"   Height="15" Width="15">
                             </Ellipse>
-                            <Rectangle Width="5"  Height="5" HorizontalAlignment="Center" VerticalAlignment="Center"  Fill="Black">
+                            <Rectangle Grid.Column="1" Grid.Row="1"   Fill="Black">
+                               
                             </Rectangle>
                         </Grid>
                     </Border>

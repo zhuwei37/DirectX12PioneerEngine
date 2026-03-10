@@ -7,5 +7,7 @@
         <ResourceDictionary Source="pack://application:,,,/DirectX12PioneerEngine.UI;component/Styles/LabelStyle.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/DirectX12PioneerEngine.UI;component/Styles/ButtonStyle.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/DirectX12PioneerEngine.UI;component/Styles/TextBoxStyle.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/DirectX12PioneerEngine.UI;component/Styles/MenuItemSytle.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/DirectX12PioneerEngine.UI;component/Styles/CheckBoxStyle.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

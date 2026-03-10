@@ -15,4 +15,14 @@
 
     <SolidColorBrush x:Key="TextBoxWatermark.Foreground" Color="#6F7E8F"/>
 
+
+    <SolidColorBrush x:Key="CheckBox.BackgroundBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="CheckBox.BorderBrush" Color="#C9D9E8"/>
+    <SolidColorBrush x:Key="CheckBox.ForegroundBrush" Color="#1E2A3A"/>
+    <SolidColorBrush x:Key="CheckBox.Background.MouseOverBrush" Color="#E1F0FE"/>
+    <SolidColorBrush x:Key="CheckBox.Border.MouseOverBrush" Color="#6CB2FF"/>
+
+    <SolidColorBrush x:Key="CheckBox.Background.CheckedBrush" Color="#4A9EFF"/>
+    <SolidColorBrush x:Key="CheckBox.Border.CheckedBrush" Color="#4A9EFF"/>
+
 </ResourceDictionary>
