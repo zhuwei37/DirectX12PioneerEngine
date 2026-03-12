@@ -11,29 +11,29 @@
             <Setter Property="MinWidth" Value="30"/>
         </Style>
         <Style x:Key="StackPanelListBoxStyle1" TargetType="ListBox">
-          
+            <Setter Property="Grid.IsSharedSizeScope" Value="True"/>
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
-            <Setter Property="Template">
+            <!--<Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListBox">
                         <Grid Grid.IsSharedSizeScope="True">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition  SharedSizeGroup="PropertyName"/>
+                                <ColumnDefinition Width="auto" SharedSizeGroup="PropertyName"/>
                                 <ColumnDefinition Width="*"   MinWidth="30" SharedSizeGroup="Place"/>
-                                <ColumnDefinition SharedSizeGroup="PropertyValueName_1"/>
-                                <ColumnDefinition SharedSizeGroup="PropertyValue_1"/>
-                                <ColumnDefinition SharedSizeGroup="PropertyValueName_2"/>
-                                <ColumnDefinition SharedSizeGroup="PropertyValue_2"/>
-                                <ColumnDefinition SharedSizeGroup="PropertyValueName_3"/>
-                                <ColumnDefinition SharedSizeGroup="PropertyValue_3"/>
-                                <ColumnDefinition SharedSizeGroup="PropertyValueName_4"/>
-                                <ColumnDefinition SharedSizeGroup="PropertyValue_4"/>
+                                <ColumnDefinition Width="auto" SharedSizeGroup="PropertyValueName_1"/>
+                                <ColumnDefinition  Width="auto" SharedSizeGroup="PropertyValue_1"/>
+                                <ColumnDefinition  Width="auto" SharedSizeGroup="PropertyValueName_2"/>
+                                <ColumnDefinition Width="auto" SharedSizeGroup="PropertyValue_2"/>
+                                <ColumnDefinition Width="auto" SharedSizeGroup="PropertyValueName_3"/>
+                                <ColumnDefinition Width="auto" SharedSizeGroup="PropertyValue_3"/>
+                                <ColumnDefinition Width="auto" SharedSizeGroup="PropertyValueName_4"/>
+                                <ColumnDefinition Width="auto" SharedSizeGroup="PropertyValue_4"/>
                             </Grid.ColumnDefinitions>
-                          <ItemsPresenter/>
+                          <ItemsPresenter />
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
-            </Setter>
+            </Setter>-->
         </Style>
 
 
@@ -68,50 +68,50 @@
             </Setter>
         </Style>
         <DataTemplate x:Key="MaterialFloatPorpertyTemplate">
-            <Grid Grid.IsSharedSizeScope="True">
+            <Grid  >
                 <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" SharedSizeGroup="PropertyName"/>
                 <ColumnDefinition Width="*" SharedSizeGroup="Place"/>
                 <ColumnDefinition Width="auto" SharedSizeGroup="PropertyValueName_1"/>
-                <ColumnDefinition SharedSizeGroup="PropertyValue_1"/>
-                <ColumnDefinition SharedSizeGroup="PropertyValueName_2"/>
-                <ColumnDefinition SharedSizeGroup="PropertyValue_2"/>
-                <ColumnDefinition SharedSizeGroup="PropertyValueName_3"/>
-                <ColumnDefinition SharedSizeGroup="PropertyValue_3"/>
-                <ColumnDefinition SharedSizeGroup="PropertyValueName_4"/>
-                <ColumnDefinition SharedSizeGroup="PropertyValue_4"/>
+                    <ColumnDefinition Width="auto" SharedSizeGroup="PropertyValue_1"/>
+                    <ColumnDefinition Width="auto" SharedSizeGroup="PropertyValueName_2"/>
+                    <ColumnDefinition Width="auto" SharedSizeGroup="PropertyValue_2"/>
+                    <ColumnDefinition Width="auto" SharedSizeGroup="PropertyValueName_3"/>
+                    <ColumnDefinition Width="auto" SharedSizeGroup="PropertyValue_3"/>
+                    <ColumnDefinition Width="auto" SharedSizeGroup="PropertyValueName_4"/>
+                    <ColumnDefinition Width="auto" SharedSizeGroup="PropertyValue_4"/>
             </Grid.ColumnDefinitions>
             <Label Content="{Binding Title}" Grid.Column="0"/>
             <TextBox Text="{Binding PropertyValue,Converter={StaticResource StringToFloat},UpdateSourceTrigger=LostFocus}"   Grid.Column="9" MinWidth="20"/>
             </Grid>
         </DataTemplate>
         <DataTemplate x:Key="MaterialFloat3PorpertyTemplate">
-            <Grid Grid.IsSharedSizeScope="True">
+            <Grid  >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" SharedSizeGroup="PropertyName"/>
                     <ColumnDefinition Width="*" SharedSizeGroup="Place"/>
-                    <ColumnDefinition SharedSizeGroup="PropertyValueName_1"/>
-                    <ColumnDefinition SharedSizeGroup="PropertyValue_1"/>
-                    <ColumnDefinition SharedSizeGroup="PropertyValueName_2"/>
-                    <ColumnDefinition SharedSizeGroup="PropertyValue_2"/>
-                    <ColumnDefinition SharedSizeGroup="PropertyValueName_3"/>
-                    <ColumnDefinition SharedSizeGroup="PropertyValue_3"/>
-                    <ColumnDefinition SharedSizeGroup="PropertyValueName_4"/>
-                    <ColumnDefinition SharedSizeGroup="PropertyValue_4"/>
+                    <ColumnDefinition Width="auto" SharedSizeGroup="PropertyValueName_1"/>
+                    <ColumnDefinition Width="auto" SharedSizeGroup="PropertyValue_1"/>
+                    <ColumnDefinition Width="auto" SharedSizeGroup="PropertyValueName_2"/>
+                    <ColumnDefinition Width="auto" SharedSizeGroup="PropertyValue_2"/>
+                    <ColumnDefinition Width="auto" SharedSizeGroup="PropertyValueName_3"/>
+                    <ColumnDefinition Width="auto" SharedSizeGroup="PropertyValue_3"/>
+                    <ColumnDefinition Width="auto" SharedSizeGroup="PropertyValueName_4"/>
+                    <ColumnDefinition Width="auto" SharedSizeGroup="PropertyValue_4"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="{Binding Title}" Grid.Column="0"/>
 
-                <Label Content="X:"  Grid.Column="5"/>
-                <TextBox Text="{Binding PropertyValue.X}" Grid.Column="6" MinWidth="20"/>
-                <Label Content="Y:"  Grid.Column="7"/>
-                <TextBox Text="{Binding PropertyValue.Y}"  Grid.Column="1" MinWidth="20"/>
+                <Label Content="X:"  Grid.Column="4"/>
+                <TextBox Text="{Binding PropertyValue.X}" Grid.Column="5" MinWidth="20"/>
+                <Label Content="Y:"  Grid.Column="6"/>
+                <TextBox Text="{Binding PropertyValue.Y}"  Grid.Column="7" MinWidth="20"/>
                 <Label Content="Z:"  Grid.Column="8"/>
                 <TextBox Text="{Binding PropertyValue.Z}"  Grid.Column="9" MinWidth="20"/>
                
             </Grid>
         </DataTemplate>
         <DataTemplate x:Key="MaterialFloat4PorpertyTemplate">
-            <Grid Grid.IsSharedSizeScope="True">
+            <Grid   >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" SharedSizeGroup="PropertyName"/>
                     <ColumnDefinition Width="*" SharedSizeGroup="Place"/>

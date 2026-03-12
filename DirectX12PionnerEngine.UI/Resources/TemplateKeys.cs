@@ -12,5 +12,8 @@ namespace DirectX12PioneerEngine.UI.Resources
 
         public static string TextBoxTemplate=nameof(TextBoxTemplate);
         public static string CheckBoxTemplate=nameof(CheckBoxTemplate);
+
+        public static string ComboBoxTemplate=nameof(ComboBoxTemplate);
+        public static string ComboBoxItemTemplate=nameof(ComboBoxItemTemplate);
     }
 }

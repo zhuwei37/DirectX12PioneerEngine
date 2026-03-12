@@ -9,5 +9,7 @@
         <ResourceDictionary Source="pack://application:,,,/DirectX12PioneerEngine.UI;component/Styles/TextBoxStyle.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/DirectX12PioneerEngine.UI;component/Styles/MenuItemSytle.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/DirectX12PioneerEngine.UI;component/Styles/CheckBoxStyle.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/DirectX12PioneerEngine.UI;component/Styles/ComboBoxStyle.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/DirectX12PioneerEngine.UI;component/Styles/ComboBoxItemStyle.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

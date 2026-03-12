@@ -25,4 +25,27 @@
     <SolidColorBrush x:Key="CheckBox.Background.CheckedBrush" Color="#4A9EFF"/>
     <SolidColorBrush x:Key="CheckBox.Border.CheckedBrush" Color="#4A9EFF"/>
 
+
+    <SolidColorBrush x:Key="ComboBox.BackgroundBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="ComboBox.BorderBrush" Color="	#C9D9E8"/>
+    <SolidColorBrush x:Key="ComboBox.ForegroundBrush" Color="#1E2A3A"/>
+
+    <SolidColorBrush x:Key="ComoBox.Background.MouseOverBrush" Color="#E1F0FE"/>
+    <SolidColorBrush x:Key="ComboBox.Border.MouseOverBrush" Color="	#6CB2FF"/>
+
+    <SolidColorBrush x:Key="ComboBox.Background.Pressed" Color="#D4E6F5"/>
+    <SolidColorBrush x:Key="ComboBox.Border.Pressed" Color="#3A8AE0"/>
+
+    <SolidColorBrush x:Key="ComboBox.Popup.BackgroundBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="ComboBox.Popup.BorderBrush" Color="#C9D9E8"/>
+
+    <SolidColorBrush x:Key="ComboBoxItem.BackgroundBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="ComboBoxItem.Background.MouseOverBrush" Color="#E1F0FE"/>
+    <SolidColorBrush x:Key="ComboBoxItem.Background.SelectedBrush" Color="#4A9EFF"/>
+    <SolidColorBrush x:Key="ComboBoxItem.ForegroundBrush" Color="	#1E2A3A"/>
+    <SolidColorBrush x:Key="ComboBoxItem.Foreground.SelectedBrush" Color="#A0B2C4"/>
+    
+
+
+
 </ResourceDictionary>

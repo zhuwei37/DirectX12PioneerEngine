@@ -10,5 +10,6 @@ namespace DirectX12PioneerEngine.UI.Resources
     public static class StyleKeys
     {
         public static string ButtonStyle = nameof(ButtonStyle); 
+        public static string ComboBoxItemStyle=nameof(ComboBoxItemStyle);
     }
 }
