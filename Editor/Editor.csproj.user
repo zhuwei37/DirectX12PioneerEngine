@@ -19,6 +19,9 @@
     <Compile Update="View\Fail\FailView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Info\Log.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Info\ResourceInfo.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

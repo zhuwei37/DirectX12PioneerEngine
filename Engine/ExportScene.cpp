@@ -5,7 +5,7 @@
 #include"MaterialContexts.h"
 #include"MaterialResource.h"
 #include"TextureResource.h"
-
+#include"LogManager.h"
 int GetSceneNodeCount()
 {
 	auto scene= EngineManager::Get()->GetMainScene();
@@ -27,7 +27,8 @@ bool GetAllSceneNodeInfos(SceneNodeInfo* data, int len)
 
 SceneNodeInfo CreateSceneNode(const char* name, unsigned int parent)
 {
-
+	
+	//LogManager::Log(LogLevel::Debug,name );
 	auto scene = EngineManager::Get()->GetMainScene();
 	auto actorManager = EngineManager::Get()->GetActorManager();
 	if (scene != nullptr)

@@ -12,7 +12,8 @@
         <Setter Property="i:ElementStateManager.BorderThickness" Value="0.5"/>
         <Setter Property="i:ElementStateManager.BorderCornerRadius" Value="3"/>
         <Setter Property="i:WatermarkHelper.Foreground" Value="{DynamicResource TextBoxWatermark.Foreground}"/>
-     
+        <Setter Property="i:WatermarkHelper.FontSize" Value="14"/>
+        <Setter Property="i:WatermarkHelper.FontFamily" Value="Microsoft Himalaya"/>
         <Setter Property="Foreground" Value="{DynamicResource TextBox.ForegroundBrush}"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>

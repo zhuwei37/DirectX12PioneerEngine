@@ -237,6 +237,9 @@
     <ClInclude Include="FxaaController.h">
       <Filter>头文件\Render</Filter>
     </ClInclude>
+    <ClInclude Include="ExportLog.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EnterEngine.cpp">
@@ -358,6 +361,9 @@
     </ClCompile>
     <ClCompile Include="FxaaController.cpp">
       <Filter>源文件\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="ExportLog.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

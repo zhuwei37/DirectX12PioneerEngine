@@ -1,5 +1,6 @@
 ﻿using Editor.RenderDx;
 using Editor.Server;
+using Editor.Server.Log;
 using System.Configuration;
 using System.Data;
 using System.Windows;
@@ -14,8 +15,11 @@ namespace Editor
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            //Delegate.Remove()
+            //Delegate.Combine()
+            LogManager.Instance.Init();
             RenderDx.EngineDxImport.InitEngine();
-           // RenderDx.EngineDxImport.SetGraphicsErrorCallBack(ErrorManager.GraphicsErrorCallBack);
+            //RenderDx.EngineDxImport.SetGraphicsErrorCallBack(ErrorManager.GraphicsErrorCallBack);
             RenderDx.EngineDxImport.LoadScene();
 
             ThemeManager.RegisterTheme("Dark", "DirectX12PioneerEngine.UI", "Themes/Dark.xaml");

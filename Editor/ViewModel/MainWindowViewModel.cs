@@ -2,6 +2,7 @@
 using Editor.RenderDx;
 using Editor.RenderDx.Device;
 using Editor.Server;
+using Editor.Server.Log;
 using Editor.Server.Scene;
 using Editor.Time;
 using Editor.View.Dialog;
@@ -36,6 +37,7 @@ namespace Editor.ViewModel
         public ICommand ShowColorCommand { get; private set; }
 
         public ICommand SwitchThemeCommand { get; private set; }
+        public ICommand LogCommand { get; private set; }
         public MainWindowViewModel()
         {
             OpenReadySceneCommand = new RelayCommand(OpenReadyScene);
@@ -43,6 +45,7 @@ namespace Editor.ViewModel
             SaveCommand=new RelayCommand(Save);
             ShowColorCommand=new RelayCommand(ShowColor);
             SwitchThemeCommand = new RelayCommand<string>(SwitchTheme);
+            LogCommand=new RelayCommand(Log);
             Init();
         }
        async void Init()
@@ -56,6 +59,8 @@ namespace Editor.ViewModel
 
             DockManager.Instance.AddTool(new InspectorMainViewModel());
             DockManager.Instance.AddPage(new ViewportDxViewModel());
+
+            DockManager.Instance.AddTool(new LogViewModel());
         }
         private void Save()
         {
@@ -89,6 +94,11 @@ namespace Editor.ViewModel
             {
                 ThemeManager.ApplyTheme(themeName);
             }
+        }
+
+        private void Log()
+        {
+            LogManager.Instance.LogInfo("这是一个日志");
         }
 
 

@@ -1,5 +1,5 @@
 #pragma once
-#pragma once
+
 #include "ExPort.h"
 #include"ResourceSystem.h"
 #include"interface.h"

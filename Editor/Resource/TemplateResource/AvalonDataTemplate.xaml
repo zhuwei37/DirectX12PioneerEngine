@@ -8,6 +8,9 @@
                     xmlns:inspector="clr-namespace:Editor.View.Inspector"
                     xmlns:vm="clr-namespace:Editor.ViewModel.Preview"
                     >
+    <DataTemplate x:Key="LogViewModelTemplate">
+        <info:Log/>
+    </DataTemplate>
     <DataTemplate x:Key="SceneNodePreviewViewModelTemplate">
         <preview:SceneNodePreview />
     </DataTemplate>

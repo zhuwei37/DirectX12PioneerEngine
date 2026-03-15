@@ -16,6 +16,12 @@ namespace Editor.RenderDx
             _ptr= Marshal.StringToHGlobalAnsi(str);
             _str= str;
         }
+        public StringExport(IntPtr ptr,bool selfDispose=false)
+        {
+            _ptr = ptr;
+            _str = Marshal.PtrToStringAnsi(ptr);
+            _disposed = !selfDispose;
+        }
         private string _str;
         private IntPtr _ptr=IntPtr.Zero;
         public IntPtr Ptr 
@@ -40,4 +46,6 @@ namespace Editor.RenderDx
             Dispose();
         }
     }
+
+    
 }

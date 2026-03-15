@@ -15,34 +15,14 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pch.h">
+    <ClInclude Include="Action.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="GraphicsException.h">
+    <ClInclude Include="Object.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="LogCallBack.h">
+    <ClInclude Include="Delegate.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="ExceptionEx.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="interface_common.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="LogManager.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="pch.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="GraphicsException.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="LogManager.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,5 +1,6 @@
-#include"pch.h"
+#include<string>
 #include <comdef.h>
+#include"GraphicsException.h"
 GraphicsException::GraphicsException(HRESULT hr, const std::string& functionName, const std::string& filename,
 	int lineNumber)
 	:ErrorCode(hr),
